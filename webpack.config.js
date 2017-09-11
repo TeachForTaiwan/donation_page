@@ -19,7 +19,7 @@ module.exports = {
         test: /\.pug$/,
         use: [
           'html-loader',
-          'pug-html-loader'
+          'pug-html-loader?exports:false'
         ]
       },
       {
@@ -39,6 +39,10 @@ module.exports = {
         use: [
           'babel-loader'
         ]
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: 'file-loader?name=[path][name].[ext]'
       }
     ]
   },
