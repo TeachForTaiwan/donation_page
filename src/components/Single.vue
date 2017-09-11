@@ -9,7 +9,8 @@
       li.item 請註明捐款人姓名、身分證字號、地址（含戶籍地址與收件人地址以便寄發收據）、電話。
       li.item 於申報所得稅時，捐款金額可作為列舉扣除額；每申報戶最高為綜合所得額20%，且上限為新台幣20萬元。
       li.item 如對線上捐款機制有任何疑問，請洽 02-2345-6225。
-    button 我知道了
+    .btn-container
+      button.btn 我知道了
 </template>
 
 <script>
@@ -24,11 +25,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#single {
+  max-width: 500px;
+  margin: 50px auto 80px;
+}
+
 .list {
   list-style: disc;
   .item {
     line-height: 1.71;
     margin: .5em auto;
   }
+}
+
+.btn-container {
+  text-align: center;
+  margin: 40px auto;
 }
 </style>

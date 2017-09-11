@@ -10,10 +10,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../sass/variable';
 .logo-container {
+  background: $c-white;
   text-align: center;
-  margin: 50px auto 40px;
+  padding: 50px 10px;
 }
 </style>
-
-
