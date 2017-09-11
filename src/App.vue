@@ -2,11 +2,13 @@
   div#app
     Logo
     Single
+    Single-form
 </template>
 
 <script>
 import Logo from './components/Logo.vue';
 import Single from './components/Single.vue';
+import SingleForm from './components/Single-form.vue';
 export default {
   data() {
     return {
@@ -14,7 +16,8 @@ export default {
   },
   components: {
     Logo,
-    Single
+    Single,
+    SingleForm
   }
 }
 </script>
