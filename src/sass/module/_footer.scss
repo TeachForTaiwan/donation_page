@@ -1,0 +1,15 @@
+.footer {
+  background: $c-grey;
+  color: $c-white;
+  padding: 20px 0;
+  text-align: center;
+  .list-container {
+    display: inline-block;
+  }
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1.5rem auto;
+  }
+}
