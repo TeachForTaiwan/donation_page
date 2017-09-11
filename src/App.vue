@@ -1,9 +1,11 @@
 <template lang="pug">
   div#app
+    Logo
     Single
 </template>
 
 <script>
+import Logo from './components/Logo.vue';
 import Single from './components/Single.vue';
 export default {
   data() {
@@ -11,6 +13,7 @@ export default {
     }
   },
   components: {
+    Logo,
     Single
   }
 }

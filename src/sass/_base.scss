@@ -2,6 +2,7 @@ body {
   background: $c-base;
   font-size: 16px;
   font-family: $ff-default;
+  color: $c-text;
 }
 
 a {
@@ -23,6 +24,14 @@ ul {
   }
 }
 
+h1 {
+  font-size: 30px;
+  color: $c-red;
+  text-align: center;
+}
+
 main {
   min-height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
 }
