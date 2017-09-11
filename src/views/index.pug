@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-html(lang="en")
+html(lang="zh-TW")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title 支持我們
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js", integrity="sha256-Gs0UYwrz/B58FsQggzU+vvCSyG/pewemP4Lssjzv8Ho=", crossorigin="anonymous")
   body
-  include partial/header
-  main.main
-    .logo-container
-      img(src="../assets/logo_350px.png", alt="LOGO")
-  include partial/footer
+    include partial/header
+    main.main
+      .logo-container
+        img.logo(src="../assets/logo_350px.png", alt="LOGO")
+      app
+    include partial/footer

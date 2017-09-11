@@ -13,6 +13,11 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js'
+    }
+  },
   module: {
     rules: [
       {
@@ -42,7 +47,25 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        use: 'file-loader?name=[path][name].[ext]'
+        use: [
+          'file-loader?name=assets/[name].[ext]'
+        ],
+      },
+      {
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            css: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: [
+                'css-loader',
+                'sass-loader',
+              ]
+            })
+          }
+        }
       }
     ]
   },
