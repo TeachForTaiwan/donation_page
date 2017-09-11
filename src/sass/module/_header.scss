@@ -1,0 +1,17 @@
+.header {
+  background: $c-grey-3;
+  color: $c-grey-2;
+  &__nav {
+    display: block;
+  }
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 4px;
+    .item {
+      padding: 8px 20px;
+    }
+  }
+}
