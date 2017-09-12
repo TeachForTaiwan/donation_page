@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
+import router from './router';
 
 const css = require('./sass/main.scss');
-
-console.log('test');
 
 /* eslint-disable no-new */
 new Vue({
   el: 'app',
+  router,
   components: { App },
 });

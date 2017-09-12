@@ -3,8 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir);
+}
+
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/main.js',
   devServer: {
     contentBase: './dist',
     hot: true
@@ -14,8 +18,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
+    extensions: ['.js', '.vue', '.json'],
     alias: {
-      vue: 'vue/dist/vue.js'
+      'vue': 'vue/dist/vue.js',
+      '@': resolve('src'),
     }
   },
   module: {
@@ -40,10 +46,9 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        use: [
-          'babel-loader'
-        ]
+        include: [resolve('src')]
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -53,8 +58,8 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        exclude: /node_modules/,
         loader: 'vue-loader',
+        exclude: /node_modules/,
         options: {
           loaders: {
             css: ExtractTextPlugin.extract({

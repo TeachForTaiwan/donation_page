@@ -1,27 +1,34 @@
 <template lang="pug">
   div#app
     Logo
-    Single
-    Single-form
+    //- 換頁動畫
+    //- https://router.vuejs.org/zh-cn/advanced/transitions.html
+    transition(name="fade")
+      router-view
 </template>
 
 <script>
 import Logo from './components/Logo.vue';
-import Single from './components/Single.vue';
-import SingleForm from './components/Single-form.vue';
+
 export default {
   data() {
     return {
-    }
+    };
   },
   components: {
     Logo,
-    Single,
-    SingleForm
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.message {}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
+}
 </style>

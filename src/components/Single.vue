@@ -10,7 +10,7 @@
       li.item 於申報所得稅時，捐款金額可作為列舉扣除額；每申報戶最高為綜合所得額20%，且上限為新台幣20萬元。
       li.item 如對線上捐款機制有任何疑問，請洽 02-2345-6225。
     .btn-container
-      button.btn 我知道了
+      router-link.btn(to="single-form") 我知道了
 </template>
 
 <script>
@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../sass/variable';
 #single {
   max-width: 500px;
   margin: 50px auto 80px;
@@ -41,5 +42,8 @@ export default {
 .btn-container {
   text-align: center;
   margin: 40px auto;
+  .btn{
+    color: $c-white;
+  }
 }
 </style>

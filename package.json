@@ -6,6 +6,7 @@
     "css-loader": "^0.28.7",
     "eslint": "^4.6.1",
     "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-html": "^3.2.1",
     "eslint-plugin-import": "^2.7.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
@@ -16,6 +17,7 @@
     "pug-html-loader": "^1.1.5",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
     "vue-loader": "^13.0.4",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.4.2",
@@ -34,6 +36,11 @@
     "dev": "webpack-dev-server --open"
   },
   "dependencies": {
-    "vue": "^2.4.2"
+    "vue": "^2.4.2",
+    "vue-router": "^2.7.0"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
   }
 }
