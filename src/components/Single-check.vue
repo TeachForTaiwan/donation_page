@@ -1,6 +1,6 @@
 <template lang="pug">
   #single-check
-    em 請確認以下資料填寫無誤。
+    em.warn 請確認以下資料填寫無誤。
     ul.list
       li.item
         .key 姓名／單位名稱*
@@ -35,6 +35,9 @@
       li.item
         .key 收據地址*
         .value {{ check.receiptAddress }}
+    .btn-container
+      router-link.btn.btn--grey(to="single-form") 回上一步
+      router-link.btn(to="") 確認無誤
 </template>
 
 <script>
@@ -53,14 +56,55 @@ export default {
         receipt: '',
         receiptTitle: '',
         receiptAddress: '',
-      }
-    }
-  }
-}
+      },
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+@import '../sass/variable';
+#single-check {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto 80px;
+}
 
+.warn {
+  color: $c-primary;
+  margin: 2em auto;
+}
+
+.list {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  .item {
+    display: flex;
+    align-items: flex-start;
+    .key {
+      min-width: 45%;
+      text-align: right;
+      padding: .55rem 2rem;
+    }
+    .value {
+      flex: 1;
+      padding: .55rem 2rem;
+      padding-left: .5rem;
+    }
+  }
+}
+
+.btn-container {
+  color: $c-white;
+  display: flex;
+  justify-content: center;
+  .btn {
+    margin: 20px;
+  }
+}
 </style>
 
 

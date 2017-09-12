@@ -5,4 +5,11 @@
   color: $c-white;
   cursor: pointer;
   padding: .5em 2em;
+  transition: .1s ease-in-out;
+  &--grey {
+    background: $c-grey;
+  }
+  &:hover{
+    opacity: .7;
+  }
 }

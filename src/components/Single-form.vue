@@ -77,6 +77,9 @@
           .radio
             input#newsletter-2.input(name="newsletter", type="radio", data-vue="2", value="n", @change="toggleRadio")
           span.text 否
+    .btn-container
+      router-link.btn.btn--grey(to="single") 回上一步
+      router-link.btn(to="single-check") 下一步
 </template>
 
 <script>
@@ -91,7 +94,7 @@ export default {
       newsletter: {
         1: true,
         2: false,
-      }
+      },
     };
   },
   methods: {
@@ -106,9 +109,9 @@ export default {
         this[targetData][key] = false;
       }
       this[targetData][targetOrder] = true;
-    }
+    },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -207,6 +210,15 @@ export default {
     }
     .text {
       padding: .4em;
+    }
+  }
+  .btn-container {
+    color: $c-white;
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+    .btn {
+      margin: 20px;
     }
   }
 }
