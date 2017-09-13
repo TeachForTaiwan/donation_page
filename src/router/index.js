@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Single from '../components/Single.vue';
 import SingleForm from '../components/Single-form.vue';
 import SingleCheck from '../components/Single-check.vue';
+import SinglePayment from '../components/Single-payment.vue';
 
 Vue.use(Router);
 
@@ -26,6 +27,11 @@ export default new Router({
       path: '/single-check',
       name: 'SingleCheck',
       component: SingleCheck,
+    },
+    {
+      path: '/single-payment',
+      name: 'SinglePayment',
+      component: SinglePayment,
     },
     {
       path: '/*',

@@ -37,7 +37,7 @@
         .value {{ check.receiptAddress }}
     .btn-container
       router-link.btn.btn--grey(to="single-form") 回上一步
-      router-link.btn(to="") 確認無誤
+      router-link.btn(to="single-payment") 確認無誤
 </template>
 
 <script>

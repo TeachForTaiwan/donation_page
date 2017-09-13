@@ -1,7 +1,6 @@
 <!-- 單次捐款 -->
 <template lang="pug">
   div#single
-    h1.title {{ title }}
     ul.list
       li.item 本公益勸募資料傳送採用SSL (Secure Socket Layer) 256 bits 安全加密機制傳輸並使用歐付寶ALLPAY付款閘道。
       li.item 您的重要資料皆用複雜的數學運算方式進行亂數編碼再進行資料傳送，且取得網際威信的伺服器數位憑證（HiTrust），讓您能夠安全安心地進行線上捐款動作。
@@ -18,7 +17,6 @@ export default {
   name: 'single',
   data() {
     return {
-      title: '單次捐款'
     };
   },
 };
