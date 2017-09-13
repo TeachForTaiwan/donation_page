@@ -42,8 +42,8 @@
         option(value="2") 不寄收據
     label.label(for="receipt-title")
       span.text 收據抬頭*
-      input#receipt-title.input(type="text", placeholder="請輸入收據抬頭", v-model="formData.receiptAddress")
-    label.label.label--checkbox(for="receipt-check", :class="{ 'is-checked': formData.receiptCheck }", @click.prevent="formData.receiptCheck = !formData.receiptCheck")
+      input#receipt-title.input(type="text", placeholder="請輸入收據抬頭", v-model="formData.receiptTitle")
+    label.label.label--checkbox(for="receipt-check", :class="{ 'is-checked': receiptCheck }", @click.prevent="handleReceiptCheck")
       .radio-container
         .radio
           input#receipt-check.input(type="checkbox")
@@ -79,8 +79,10 @@
             input#newsletter-2.input(name="newsletter", type="radio", value="false", v-model="formData.newsletter")
           span.text 否
     .btn-container
-      router-link.btn.btn--grey(to="single") 回上一步
-      router-link.btn(to="single-check") 下一步
+      router-link.btn.btn--grey(to="single")
+        span(@click="emitFormData") 回上一步
+      router-link.btn(to="single-check")
+        span(@click="emitFormData") 下一步
 </template>
 
 <script>
@@ -88,7 +90,7 @@ export default {
   data() {
     return {
       receiptCheck: false,
-      formData: {
+      formData: this.$parent.formData || {
         name: '',
         code: '',
         idNumber: '',
@@ -98,7 +100,6 @@ export default {
         email: '',
         address: '',
         receipt: '',
-        receiptCheck: '',
         receiptTitle: '',
         receiptAddress: '',
         campaign: '',
@@ -107,6 +108,12 @@ export default {
     };
   },
   methods: {
+    handleReceiptCheck() {
+      this.receiptCheck = !this.receiptCheck;
+    },
+    emitFormData() {
+      this.$emit('emitFormData', this.formData);
+    },
   },
 };
 </script>

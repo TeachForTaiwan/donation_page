@@ -5,7 +5,7 @@
     //- 換頁動畫
     //- https://router.vuejs.org/zh-cn/advanced/transitions.html
     transition(name="fade")
-      router-view
+      router-view(@emitFormData="getFormData")
 </template>
 
 <script>
@@ -15,10 +15,16 @@ export default {
   data() {
     return {
       donationType: '單次捐款',
+      formData: '',
     };
   },
   components: {
     Logo,
+  },
+  methods: {
+    getFormData(data) {
+      this.formData = JSON.parse(JSON.stringify(data));
+    },
   },
 };
 </script>

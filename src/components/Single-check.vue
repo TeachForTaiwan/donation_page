@@ -4,37 +4,37 @@
     ul.list
       li.item
         .key 姓名／單位名稱*
-        .value {{ check.name }}
+        .value {{ formData.name }}
       li.item
         .key 企業代碼
-        .value {{ check.code }}
+        .value {{ formData.code }}
       li.item
         .key 身分證字號／統一編號
-        .value {{ check.idNumber }}
+        .value {{ formData.idNumber }}
       li.item
         .key 性別
-        .value {{ check.gender }}
+        .value {{ formData.gender }}
       li.item
         .key 出生日期
-        .value {{ check.birth }}
+        .value {{ formData.birth }}
       li.item
         .key 聯絡電話*
-        .value {{ check.tel }}
+        .value {{ formData.tel }}
       li.item
         .key 電子信箱*
-        .value {{ check.email }}
+        .value {{ formData.email }}
       li.item
         .key 通訊地址*
-        .value {{ check.address }}
+        .value {{ formData.address }}
       li.item
         .key 收據寄發*
-        .value {{ check.receipt }}
+        .value {{ formData.receipt }}
       li.item
         .key 收據抬頭*
-        .value {{ check.receiptTitle }}
+        .value {{ formData.receiptTitle }}
       li.item
         .key 收據地址*
-        .value {{ check.receiptAddress }}
+        .value {{ formData.receiptAddress }}
     .btn-container
       router-link.btn.btn--grey(to="single-form") 回上一步
       router-link.btn(to="single-payment") 確認無誤
@@ -44,19 +44,20 @@
 export default {
   data() {
     return {
-      check: {
-        name: '',
-        code: '',
-        idNumber: '',
-        gender: '',
-        birth: '',
-        tel: '',
-        email: '',
-        address: '',
-        receipt: '',
-        receiptTitle: '',
-        receiptAddress: '',
-      },
+      formData: this.$parent.formData,
+      // check: {
+      //   name: '',
+      //   code: '',
+      //   idNumber: '',
+      //   gender: '',
+      //   birth: '',
+      //   tel: '',
+      //   email: '',
+      //   address: '',
+      //   receipt: '',
+      //   receiptTitle: '',
+      //   receiptAddress: '',
+      // },
     };
   },
 };
