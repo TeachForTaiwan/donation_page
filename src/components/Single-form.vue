@@ -1,14 +1,17 @@
 <template lang="pug">
+  //- autocomplete off for security
   form#form.form
     label.label(for="name")
       span.text 姓名／單位名稱*
-      input#name.input(type="text", placeholder="請輸入姓名／單位名稱", v-model="formData.name")
+      p.control
+        input#name.input(name="name", type="text", placeholder="請輸入姓名／單位名稱", v-model="formData.name", v-validate="'required'", :class="{ 'is-danger': errors.has('name') }")
+        span.help.is-danger(v-show="errors.has('name')") {{ errors.first('name') }}
     label.label(for="code", placeholder="請輸入企業代碼")
       span.text 企業代碼
       input#code.input(type="text", v-model="formData.code")
     label.label(for="id-number")
       span.text 身分證字號／統一編號
-      input#id-number.input(type="text", placeholder="請輸入身分證字號／統一編號", v-model="formData.idNumber")
+      input#id-number.input(type="text", placeholder="請輸入身分證字號／統一編號", autocomplete="off", v-model="formData.idNumber")
     label.label(for="gender")
       span.text 性別
       select#gender.select(v-model="formData.gender")
@@ -21,10 +24,12 @@
       input#birth.input(type="date", v-model="formData.birth")
     label.label(for="tel")
       span.text 聯絡電話*
-      input#tel.input(type="tel", placeholder="請輸入聯絡電話", v-model="formData.tel")
+      input#tel.input(type="tel", placeholder="請輸入聯絡電話", autocomplete="off", v-model="formData.tel", v-validate="'required'")
     label.label(for="email")
       span.text 電子信箱*
-      input#email.input(type="email", placeholder="請輸入電子信箱", v-model="formData.email")
+      p.control
+        input#email.input(name="email", type="email", placeholder="請輸入電子信箱", :class="{ 'is-danger': errors.has('email') }", v-model="formData.email", v-validate="'required|email'")
+        span.help.is-danger(v-show="errors.has('email')") {{ errors.first('email') }}
     label.label
       span.text 通訊地址*
       .input-set
@@ -104,6 +109,8 @@ export default {
         receiptAddress: '',
         campaign: '',
         newsletter: '',
+        amount: '',
+        paymentType: '',
       },
     };
   },

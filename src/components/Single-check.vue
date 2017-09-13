@@ -44,20 +44,23 @@
 export default {
   data() {
     return {
-      formData: this.$parent.formData,
-      // check: {
-      //   name: '',
-      //   code: '',
-      //   idNumber: '',
-      //   gender: '',
-      //   birth: '',
-      //   tel: '',
-      //   email: '',
-      //   address: '',
-      //   receipt: '',
-      //   receiptTitle: '',
-      //   receiptAddress: '',
-      // },
+      formData: this.$parent.formData || {
+        name: '',
+        code: '',
+        idNumber: '',
+        gender: '',
+        birth: '',
+        tel: '',
+        email: '',
+        address: '',
+        receipt: '',
+        receiptTitle: '',
+        receiptAddress: '',
+        campaign: '',
+        newsletter: '',
+        amount: '',
+        paymentType: '',
+      },
     };
   },
 };

@@ -24,6 +24,22 @@
       text-align: right;
       padding: .55rem 1rem;
     }
+    // for vee-validate
+    .control {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      .is-danger {
+        border-color: $c-primary;
+        transition: .1s ease-in-out;
+        &.help {
+          color: $c-primary;
+          padding: .2em 0;
+        }
+      }
+    }
     .input,
     .select {
       flex: 1;
