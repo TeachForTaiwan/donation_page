@@ -43,6 +43,11 @@
     label.label(for="receipt-title")
       span.text 收據抬頭*
       input#receipt-title.input(type="text", placeholder="請輸入收據抬頭")
+    label.label.label--checkbox(for="receipt-check", :class="{ 'is-checked': receiptCheck }", @click.prevent="toggleCheckbox")
+      .radio-container
+        .radio
+          input#receipt-check.input(type="checkbox", data-vue="receiptCheck")
+      span.text 收據資訊同通訊資訊
     label.label
       span.text 收據地址*
       .input-set
@@ -51,10 +56,6 @@
         select#receipt-town.select
           option(selected, disabled) 鄉鎮市區
         input#receipt-address.input(type="text", placeholder="請輸入地址")
-    label.label.label--checkbox(for="receipt-check", :class="{ 'is-checked': receiptCheck }", @click.prevent="toggleCheckbox")
-      .radio
-        input#receipt-check.input(type="checkbox", data-vue="receiptCheck")
-      span.text 收據資訊同通訊資訊
     .label-wrap
       span.text 是否願意收到實體文宣，了解TFT的近況與成果？
       .radio-container

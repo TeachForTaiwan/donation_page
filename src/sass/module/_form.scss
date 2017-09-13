@@ -77,7 +77,18 @@
     }
     &--checkbox {
       align-items: center;
+      justify-content: flex-start;
       @include radio();
+      .radio-container {
+        justify-content: flex-end;
+        padding: .55rem 1rem;
+        min-width: 32%;
+        padding-right: 0;
+        padding-left: 4em;
+      }
+      .text {
+        padding-left: 0;
+      }
     }
     &--radio {
       @include radio();
