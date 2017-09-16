@@ -4,7 +4,7 @@
     h1.title {{ donationType }}
     //- 換頁動畫
     //- https://router.vuejs.org/zh-cn/advanced/transitions.html
-    transition(name="fade")
+    transition(name="fade", mode="out-in")
       router-view(@emitFormData="getFormData")
 </template>
 
@@ -39,4 +39,5 @@ export default {
 .fade-leave-to {
   opacity: 0
 }
+
 </style>
