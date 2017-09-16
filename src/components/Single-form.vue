@@ -24,7 +24,9 @@
       input#birth.input(type="date", v-model="formData.birth")
     label.label(for="tel")
       span.text 聯絡電話*
-      input#tel.input(type="tel", placeholder="請輸入聯絡電話", autocomplete="off", v-model="formData.tel", v-validate="'required'")
+      p.control
+        input#tel.input(name="tel", type="tel", placeholder="請輸入聯絡電話", autocomplete="off", :class="{ 'is-danger': errors.has('tel') }", v-model="formData.tel", v-validate="'required'")
+        span.help.is-danger(v-show="errors.has('tel')") {{ errors.first('tel') }}
     label.label(for="email")
       span.text 電子信箱*
       p.control
@@ -33,11 +35,12 @@
     label.label(role="tw-city-selector")
       span.text 通訊地址*
       .input-set
-        select#county.select(v-model="formData.county")
-          option(selected, disabled) 縣市
-        select#district.select(v-model="formData.district")
-          option(selected, disabled) 鄉鎮市區
-        input#address.input(type="text", placeholder="請輸入地址", v-model="formData.address")
+        select#county.select(name="county", v-model="formData.county", :class="{ 'is-danger': errors.has('county') }", v-validate="'required'")
+          //- option(selected, disabled) 縣市
+        select#district.select(name="district", v-model="formData.district", :class="{ 'is-danger': errors.has('district') }", v-validate="'required'")
+          //- option(selected, disabled) 鄉鎮市區
+        input#address.input(name="address", type="text", placeholder="請輸入地址", :class="{ 'is-danger': errors.has('address') }", v-model="formData.address", v-validate="'required'")
+        span.help.is-danger(v-show="errors.has('address')") {{ errors.first('address') }}
     label.label(for="receipt")
       span.text 收據寄發*
       select#receipt.select(v-model="formData.receipt")
@@ -53,14 +56,15 @@
         .radio
           input#receipt-check.input(type="checkbox")
       span.text 收據資訊同通訊資訊
-    label.label(role="tw-city-selector--receipt")
-      span.text 收據地址*
-      .input-set
-        select#receipt-county.select(v-model="formData.receiptCounty")
-          option(selected, disabled) 縣市
-        select#receipt-district.select(v-model="formData.receiptDistrict")
-          option(selected, disabled) 鄉鎮市區
-        input#receipt-address.input(type="text", placeholder="請輸入地址")
+    transition(name="height")
+      label.label(role="tw-city-selector--receipt", v-show="!receiptCheck")
+        span.text 收據地址*
+        .input-set
+          select#receipt-county.select(v-model="formData.receiptCounty")
+            option(selected, disabled) 縣市
+          select#receipt-district.select(v-model="formData.receiptDistrict")
+            option(selected, disabled) 鄉鎮市區
+          input#receipt-address.input(type="text", placeholder="請輸入地址", v-model="formData.receiptAddress")
     .label-wrap
       span.text 是否願意收到實體文宣，了解TFT的近況與成果？
       .radio-container
@@ -108,7 +112,7 @@ export default {
         county: '',
         district: '',
         address: '',
-        receipt: '',
+        receipt: '請選擇是否需要收據',
         receiptTitle: '',
         receiptCounty: '',
         receiptDistrict: '',
@@ -123,19 +127,39 @@ export default {
   methods: {
     handleReceiptCheck() {
       this.receiptCheck = !this.receiptCheck;
+      this.formData.receiptCounty = this.formData.county;
+      this.formData.receiptDistrict = this.formData.district;
+      this.formData.receiptAddress = this.formData.address;
     },
     emitFormData() {
       this.$emit('emitFormData', this.formData);
     },
+    validateForm() {
+      return new Promise((resolve, reject) => {
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            console.log(result);
+            // eslint-disable-next-line
+            alert('Form Submitted!');
+            resolve();
+            return;
+          }
+          const errorMsg = 'error msg';
+          console.log(errorMsg);
+          // reject(errorMsg);
+          alert('Correct them errors!');
+        });
+      });
+    },
   },
   mounted() {
     /* eslint-disable no-new */
+
     // address
     new TWCitySelector({
       el: '[role="tw-city-selector"]',
       elCounty: '#county',
       elDistrict: '#district',
-      // elZipcode: '',
     });
     // receipt address
     new TWCitySelector({
@@ -143,6 +167,10 @@ export default {
       elCounty: '#receipt-county',
       elDistrict: '#receipt-district',
     });
+  },
+  beforeRouteLeave(to, from, next) {
+    this.validateForm()
+      .then(next);
   },
 };
 </script>
@@ -155,5 +183,17 @@ export default {
   padding: .55rem .5rem;
   margin-right: 15px;
   margin-bottom: 15px;
+}
+
+.height-enter-active,
+.height-leave-active {
+  transition: all .5s ease-in-out, max-height .7s;
+  max-height: 500px;
+}
+
+.height-enter,
+.height-leave-to {
+  max-height: 0;
+  opacity: 0;
 }
 </style>
