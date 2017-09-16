@@ -30,14 +30,14 @@
       p.control
         input#email.input(name="email", type="email", placeholder="請輸入電子信箱", :class="{ 'is-danger': errors.has('email') }", v-model="formData.email", v-validate="'required|email'")
         span.help.is-danger(v-show="errors.has('email')") {{ errors.first('email') }}
-    label.label
+    label.label(role="tw-city-selector")
       span.text 通訊地址*
       .input-set
-        select#city.select
+        select#county.select(v-model="formData.county")
           option(selected, disabled) 縣市
-        select#town.select
+        select#district.select(v-model="formData.district")
           option(selected, disabled) 鄉鎮市區
-        input#address.input(type="text", placeholder="請輸入地址")
+        input#address.input(type="text", placeholder="請輸入地址", v-model="formData.address")
     label.label(for="receipt")
       span.text 收據寄發*
       select#receipt.select(v-model="formData.receipt")
@@ -53,12 +53,12 @@
         .radio
           input#receipt-check.input(type="checkbox")
       span.text 收據資訊同通訊資訊
-    label.label
+    label.label(role="tw-city-selector--receipt")
       span.text 收據地址*
       .input-set
-        select#receipt-city.select
+        select#receipt-county.select(v-model="formData.receiptCounty")
           option(selected, disabled) 縣市
-        select#receipt-town.select
+        select#receipt-district.select(v-model="formData.receiptDistrict")
           option(selected, disabled) 鄉鎮市區
         input#receipt-address.input(type="text", placeholder="請輸入地址")
     .label-wrap
@@ -91,6 +91,8 @@
 </template>
 
 <script>
+import TWCitySelector from 'tw-city-selector/tw-city-selector.min';
+
 export default {
   data() {
     return {
@@ -103,9 +105,13 @@ export default {
         birth: '',
         tel: '',
         email: '',
+        county: '',
+        district: '',
         address: '',
         receipt: '',
         receiptTitle: '',
+        receiptCounty: '',
+        receiptDistrict: '',
         receiptAddress: '',
         campaign: '',
         newsletter: '',
@@ -122,9 +128,32 @@ export default {
       this.$emit('emitFormData', this.formData);
     },
   },
+  mounted() {
+    /* eslint-disable no-new */
+    // address
+    new TWCitySelector({
+      el: '[role="tw-city-selector"]',
+      elCounty: '#county',
+      elDistrict: '#district',
+      // elZipcode: '',
+    });
+    // receipt address
+    new TWCitySelector({
+      el: '[role="tw-city-selector--receipt"]',
+      elCounty: '#receipt-county',
+      elDistrict: '#receipt-district',
+    });
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 // edit style in sass/module/_form.scss
+[role=tw-city-selector] select,
+[role=tw-city-selector--receipt] select {
+  flex: .4;
+  padding: .55rem .5rem;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
 </style>
