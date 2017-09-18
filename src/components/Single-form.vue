@@ -4,18 +4,36 @@
     label.label(for="name")
       span.text 姓名／單位名稱*
       p.control
-        input#name.input(name="name", type="text", placeholder="請輸入姓名／單位名稱", v-model="formData.name", v-validate="'required'", :class="{ 'is-danger': errors.has('name') }")
+        input#name.input(
+          name="name",
+          type="text",
+          :class="{ 'is-danger': errors.has('name') }"
+          placeholder="請輸入姓名／單位名稱",
+          v-model="formData.name",
+          v-validate="'required'",
+          )
         span.help.is-danger(v-show="errors.has('name')") {{ errors.first('name') }}
     label.label(for="code", placeholder="請輸入企業代碼")
       span.text 企業代碼
-      input#code.input(type="text", v-model="formData.code")
+      input#code.input(
+        name="code",
+        type="text",
+        placeholder="請輸入企業代碼"
+        v-model="formData.code",
+        )
     label.label(for="id-number")
       span.text 身分證字號／統一編號
-      input#id-number.input(type="text", placeholder="請輸入身分證字號／統一編號", autocomplete="off", v-model="formData.idNumber")
+      input#id-number.input(
+        name="idNumber",
+        type="text",
+        autocomplete="off",
+        placeholder="請輸入身分證字號／統一編號",
+        v-model="formData.idNumber"
+        )
     label.label(for="gender")
       span.text 性別
       select#gender.select(v-model="formData.gender")
-        option(selected, disabled) 請選擇性別
+        option(value="", disabled, hidden) 請選擇性別
         option(value="男") 男
         option(value="女") 女
         option(value="其他") 其他
@@ -25,35 +43,84 @@
     label.label(for="tel")
       span.text 聯絡電話*
       p.control
-        input#tel.input(name="tel", type="tel", placeholder="請輸入聯絡電話", autocomplete="off", :class="{ 'is-danger': errors.has('tel') }", v-model="formData.tel", v-validate="'required'")
+        input#tel.input(
+          name="tel",
+          type="tel",
+          :class="{ 'is-danger': errors.has('tel') }",
+          autocomplete="off",
+          placeholder="請輸入聯絡電話",
+          v-model="formData.tel",
+          v-validate="'required'"
+          )
         span.help.is-danger(v-show="errors.has('tel')") {{ errors.first('tel') }}
     label.label(for="email")
       span.text 電子信箱*
       p.control
-        input#email.input(name="email", type="email", placeholder="請輸入電子信箱", :class="{ 'is-danger': errors.has('email') }", v-model="formData.email", v-validate="'required|email'")
+        input#email.input(
+          name="email",
+          type="email",
+          :class="{ 'is-danger': errors.has('email') }",
+          placeholder="請輸入電子信箱",
+          v-model="formData.email",
+          v-validate="'required|email'"
+          )
         span.help.is-danger(v-show="errors.has('email')") {{ errors.first('email') }}
     label.label(role="tw-city-selector")
       span.text 通訊地址*
       .input-set
-        select#county.select(name="county", v-model="formData.county", :class="{ 'is-danger': errors.has('county') }", v-validate="'required'")
+        select#county.select(
+          name="county",
+          :class="{ 'is-danger': errors.has('county') }",
+          v-model="formData.county",
+          v-validate="'required'"
+          )
           //- option(selected, disabled) 縣市
-        select#district.select(name="district", v-model="formData.district", :class="{ 'is-danger': errors.has('district') }", v-validate="'required'")
+        select#district.select(
+          name="district",
+          :class="{ 'is-danger': errors.has('district') }",
+          v-model="formData.district",
+          v-validate="'required'"
+          )
           //- option(selected, disabled) 鄉鎮市區
-        input#address.input(name="address", type="text", placeholder="請輸入地址", :class="{ 'is-danger': errors.has('address') }", v-model="formData.address", v-validate="'required'")
+        input#address.input(
+          name="address",
+          type="text",
+          :class="{ 'is-danger': errors.has('address') }",
+          placeholder="請輸入地址",
+          v-model="formData.address",
+          v-validate="'required'"
+          )
         span.help.is-danger(v-show="errors.has('address')") {{ errors.first('address') }}
     label.label(for="receipt")
       span.text 收據寄發*
-      select#receipt.select(name="receipt", v-model="formData.receipt", :class="{ 'is-danger': errors.has('receipt') }", v-validate="'required|not_in:請選擇是否需要收據'")
-        option(selected, disabled) 請選擇是否需要收據
+      select#receipt.select(
+        name="receipt",
+        :class="{ 'is-danger': errors.has('receipt') }",
+        v-model="formData.receipt",
+        v-validate="'required'"
+        )
+        option(value="", disabled, hidden) 請選擇是否需要收據
         option(value="年度收據") 年度收據
         option(value="單次收據") 單次收據
         option(value="不寄收據") 不寄收據
     label.label(for="receipt-title")
       span.text 收據抬頭*
       p.control
-        input#receipt-title.input(name="receiptTitle", type="text", placeholder="請輸入收據抬頭", v-model="formData.receiptTitle", :class="{ 'is-danger': errors.has('receiptTitle') }", v-validate="'required'")
+        input#receipt-title.input(
+          name="receiptTitle",
+          type="text",
+          :class="{ 'is-danger': errors.has('receiptTitle') }",
+          placeholder="請輸入收據抬頭",
+          v-model="formData.receiptTitle",
+          v-validate="'required'"
+          )
         span.help.is-danger(v-show="errors.has('receiptTitle')") {{ errors.first('receiptTitle') }}
-    label.label.label--checkbox(for="receipt-check", :class="{ 'is-checked': receiptCheck }", @click.prevent="handleReceiptCheck")
+    label.label.label--checkbox(
+      v-if="formData.county && formData.district && formData.address",
+      for="receipt-check",
+      :class="{ 'is-checked': receiptCheck }",
+      @click.prevent="handleReceiptCheck"
+      )
       .radio-container
         .radio
           input#receipt-check.input(type="checkbox")
@@ -62,11 +129,28 @@
       label.label(role="tw-city-selector--receipt", v-show="!receiptCheck")
         span.text 收據地址*
         .input-set
-          select#receipt-county.select(name="receiptCounty", v-model="formData.receiptCounty", :class="{ 'is-danger': errors.has('receiptCounty') }", v-validate="'required'")
+          select#receipt-county.select(
+            name="receiptCounty",
+            :class="{ 'is-danger': errors.has('receiptCounty') }",
+            v-model="formData.receiptCounty",
+            v-validate="'required'"
+            )
             //- option(selected, disabled) 縣市
-          select#receipt-district.select(name="receiptDistrict", v-model="formData.receiptDistrict", :class="{ 'is-danger': errors.has('receiptDistrict') }", v-validate="'required'")
+          select#receipt-district.select(
+            name="receiptDistrict",
+            :class="{ 'is-danger': errors.has('receiptDistrict') }",
+            v-model="formData.receiptDistrict",
+            v-validate="'required'"
+            )
             //- option(selected, disabled) 鄉鎮市區
-          input#receipt-address.input(name="receiptAddress", type="text", placeholder="請輸入地址", v-model="formData.receiptAddress", :class="{ 'is-danger': errors.has('receiptAddress') }", v-validate="'required'")
+          input#receipt-address.input(
+            name="receiptAddress",
+            type="text",
+            :class="{ 'is-danger': errors.has('receiptAddress') }",
+            placeholder="請輸入地址",
+            v-model="formData.receiptAddress",
+            v-validate="'required'"
+            )
           span.help.is-danger(v-show="errors.has('receiptAddress')") {{ errors.first('receiptAddress') }}
     .label-wrap
       span.text 是否願意收到實體文宣，了解TFT的近況與成果？
@@ -99,6 +183,7 @@
 
 <script>
 import TWCitySelector from 'tw-city-selector/tw-city-selector.min';
+import swal from 'sweetalert2';
 
 export default {
   data() {
@@ -108,20 +193,20 @@ export default {
         name: '', // *
         code: '',
         idNumber: '',
-        gender: '請選擇性別',
+        gender: '',
         birth: '',
         tel: '', // *
         email: '', // *
         county: '', // *
         district: '', // *
         address: '', // *
-        receipt: '請選擇是否需要收據', // *
+        receipt: '', // *
         receiptTitle: '', // *
         receiptCounty: '', // *
         receiptDistrict: '', // *
         receiptAddress: '', // *
-        campaign: '',
-        newsletter: '',
+        campaign: 'true',
+        newsletter: 'true',
         amount: '',
         paymentType: '',
       },
@@ -143,13 +228,12 @@ export default {
           if (result) {
             console.log(result);
             // eslint-disable-next-line
-            alert('Form Submitted!');
-            resolve();
+            console.log('Form Submitted!');
+            resolve(result);
             return;
           }
-          const errorMsg = 'error msg';
+          const errorMsg = 'validateForm: 請檢查表單資料';
           reject(errorMsg);
-          alert('Correct them errors!');
         });
       });
     },
@@ -172,12 +256,27 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     this.validateForm()
-      .then(next);
+      .then(next)
+      .catch((errMsg) => {
+        // auto scroll to error field
+        const errorFirst = this.$el.querySelector('input.is-danger, select.is-danger');
+        if (errorFirst) {
+          errorFirst.scrollIntoView({ behavior: 'instant' });
+          errorFirst.focus();
+        }
+        console.error(errMsg);
+        swal(
+          '請檢查填寫的資料',
+          '您填寫的資料可能有誤，請確認有無漏填',
+          'warning',
+        );
+      });
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import url(../../node_modules/sweetalert2/dist/sweetalert2.min.css);
 // edit style in sass/module/_form.scss
 [role=tw-city-selector] select,
 [role=tw-city-selector--receipt] select {
