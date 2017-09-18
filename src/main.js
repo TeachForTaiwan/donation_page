@@ -11,12 +11,24 @@ const css = require('./sass/main.scss');
 const dict = {
   zh_TW: {
     custom: {
+      name: {
+        required: '此欄位必填',
+      },
+      tel: {
+        required: '此欄位必填',
+      },
       email: {
         required: '此欄位必填',
         email: '請輸入正確的 email 格式',
       },
-      name: {
+      address: {
+        required: '通訊地址必填',
+      },
+      receiptTitle: {
         required: '此欄位必填',
+      },
+      receiptAddress: {
+        required: '收據地址必填',
       },
     },
   },

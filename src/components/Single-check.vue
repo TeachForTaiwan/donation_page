@@ -5,16 +5,16 @@
       li.item
         .key 姓名／單位名稱*
         .value {{ formData.name }}
-      li.item
+      li.item(:class="{ 'is-fade': !formData.code }")
         .key 企業代碼
         .value {{ formData.code }}
-      li.item
+      li.item(:class="{ 'is-fade': !formData.idNumber }")
         .key 身分證字號／統一編號
         .value {{ formData.idNumber }}
-      li.item
+      li.item(:class="{ 'is-fade': !formData.gender }")
         .key 性別
         .value {{ formData.gender }}
-      li.item
+      li.item(:class="{ 'is-fade': !formData.birth }")
         .key 出生日期
         .value {{ formData.birth }}
       li.item
@@ -25,7 +25,7 @@
         .value {{ formData.email }}
       li.item
         .key 通訊地址*
-        .value {{ formData.address }}
+        .value {{ formData.county + formData.district + formData.address }}
       li.item
         .key 收據寄發*
         .value {{ formData.receipt }}
@@ -34,7 +34,7 @@
         .value {{ formData.receiptTitle }}
       li.item
         .key 收據地址*
-        .value {{ formData.receiptAddress }}
+        .value {{ formData.receiptCounty + formData.receiptDistrict + formData.receiptAddress }}
     .btn-container
       router-link.btn.btn--grey(to="single-form") 回上一步
       router-link.btn(to="single-payment") 確認無誤
@@ -108,6 +108,11 @@ export default {
   .btn {
     margin: 20px;
   }
+}
+
+.is-fade {
+  opacity: .5;
+  user-select: none;
 }
 </style>
 

@@ -16,9 +16,9 @@
       span.text 性別
       select#gender.select(v-model="formData.gender")
         option(selected, disabled) 請選擇性別
-        option(value="0") 男
-        option(value="1") 女
-        option(value="2") 其他
+        option(value="男") 男
+        option(value="女") 女
+        option(value="其他") 其他
     label.label(for="birth")
       span.text 出生日期
       input#birth.input(type="date", v-model="formData.birth")
@@ -43,14 +43,16 @@
         span.help.is-danger(v-show="errors.has('address')") {{ errors.first('address') }}
     label.label(for="receipt")
       span.text 收據寄發*
-      select#receipt.select(v-model="formData.receipt")
+      select#receipt.select(name="receipt", v-model="formData.receipt", :class="{ 'is-danger': errors.has('receipt') }", v-validate="'required|not_in:請選擇是否需要收據'")
         option(selected, disabled) 請選擇是否需要收據
-        option(value="0") 年度收據
-        option(value="1") 單次收據
-        option(value="2") 不寄收據
+        option(value="年度收據") 年度收據
+        option(value="單次收據") 單次收據
+        option(value="不寄收據") 不寄收據
     label.label(for="receipt-title")
       span.text 收據抬頭*
-      input#receipt-title.input(type="text", placeholder="請輸入收據抬頭", v-model="formData.receiptTitle")
+      p.control
+        input#receipt-title.input(name="receiptTitle", type="text", placeholder="請輸入收據抬頭", v-model="formData.receiptTitle", :class="{ 'is-danger': errors.has('receiptTitle') }", v-validate="'required'")
+        span.help.is-danger(v-show="errors.has('receiptTitle')") {{ errors.first('receiptTitle') }}
     label.label.label--checkbox(for="receipt-check", :class="{ 'is-checked': receiptCheck }", @click.prevent="handleReceiptCheck")
       .radio-container
         .radio
@@ -60,11 +62,12 @@
       label.label(role="tw-city-selector--receipt", v-show="!receiptCheck")
         span.text 收據地址*
         .input-set
-          select#receipt-county.select(v-model="formData.receiptCounty")
-            option(selected, disabled) 縣市
-          select#receipt-district.select(v-model="formData.receiptDistrict")
-            option(selected, disabled) 鄉鎮市區
-          input#receipt-address.input(type="text", placeholder="請輸入地址", v-model="formData.receiptAddress")
+          select#receipt-county.select(name="receiptCounty", v-model="formData.receiptCounty", :class="{ 'is-danger': errors.has('receiptCounty') }", v-validate="'required'")
+            //- option(selected, disabled) 縣市
+          select#receipt-district.select(name="receiptDistrict", v-model="formData.receiptDistrict", :class="{ 'is-danger': errors.has('receiptDistrict') }", v-validate="'required'")
+            //- option(selected, disabled) 鄉鎮市區
+          input#receipt-address.input(name="receiptAddress", type="text", placeholder="請輸入地址", v-model="formData.receiptAddress", :class="{ 'is-danger': errors.has('receiptAddress') }", v-validate="'required'")
+          span.help.is-danger(v-show="errors.has('receiptAddress')") {{ errors.first('receiptAddress') }}
     .label-wrap
       span.text 是否願意收到實體文宣，了解TFT的近況與成果？
       .radio-container
@@ -102,21 +105,21 @@ export default {
     return {
       receiptCheck: false,
       formData: this.$parent.formData || {
-        name: '',
+        name: '', // *
         code: '',
         idNumber: '',
-        gender: '',
+        gender: '請選擇性別',
         birth: '',
-        tel: '',
-        email: '',
-        county: '',
-        district: '',
-        address: '',
-        receipt: '請選擇是否需要收據',
-        receiptTitle: '',
-        receiptCounty: '',
-        receiptDistrict: '',
-        receiptAddress: '',
+        tel: '', // *
+        email: '', // *
+        county: '', // *
+        district: '', // *
+        address: '', // *
+        receipt: '請選擇是否需要收據', // *
+        receiptTitle: '', // *
+        receiptCounty: '', // *
+        receiptDistrict: '', // *
+        receiptAddress: '', // *
         campaign: '',
         newsletter: '',
         amount: '',
@@ -145,8 +148,7 @@ export default {
             return;
           }
           const errorMsg = 'error msg';
-          console.log(errorMsg);
-          // reject(errorMsg);
+          reject(errorMsg);
           alert('Correct them errors!');
         });
       });
