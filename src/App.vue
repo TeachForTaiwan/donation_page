@@ -1,7 +1,7 @@
 <template lang="pug">
   div#app
     Logo
-    h1.title {{ donationType }}
+    h1.title {{ pageTitle }}
     ProgressBar(ref="ProgressBar")
     //- 換頁動畫
     //- https://router.vuejs.org/zh-cn/advanced/transitions.html
@@ -16,7 +16,7 @@ import ProgressBar from './components/Progress-bar.vue';
 export default {
   data() {
     return {
-      donationType: '單次捐款',
+      pageTitle: '單次捐款',
       formData: '',
       progress: 1,
     };
