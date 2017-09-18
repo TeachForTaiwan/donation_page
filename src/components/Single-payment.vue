@@ -36,6 +36,7 @@
 export default {
   data() {
     return {
+      progressBar: 3,
       formData: this.$parent.formData || {
         name: '',
         code: '',

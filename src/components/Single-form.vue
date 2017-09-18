@@ -176,9 +176,9 @@
           span.text 否
     .btn-container
       router-link.btn.btn--grey(to="single")
-        span(@click="emitFormData") 回上一步
+        span(@click="emitFormData() + emitProgress(1)") 回上一步
       router-link.btn(to="single-check")
-        span(@click="emitFormData") 下一步
+        span(@click="emitFormData() + emitProgress(3)") 下一步
 </template>
 
 <script>
@@ -222,6 +222,9 @@ export default {
     emitFormData() {
       this.$emit('emitFormData', this.formData);
     },
+    emitProgress(progress) {
+      this.$emit('emitProgress', progress);
+    },
     validateForm() {
       return new Promise((resolve, reject) => {
         this.$validator.validateAll().then((result) => {
@@ -255,22 +258,26 @@ export default {
     });
   },
   beforeRouteLeave(to, from, next) {
-    this.validateForm()
-      .then(next)
-      .catch((errMsg) => {
-        // auto scroll to error field
-        const errorFirst = this.$el.querySelector('input.is-danger, select.is-danger');
-        if (errorFirst) {
-          errorFirst.scrollIntoView({ behavior: 'instant' });
-          errorFirst.focus();
-        }
-        console.error(errMsg);
-        swal(
-          '請檢查填寫的資料',
-          '您填寫的資料可能有誤，請確認有無漏填',
-          'warning',
-        );
-      });
+    if (to.path === '/single-check') {
+      this.validateForm()
+        .then(next)
+        .catch((errMsg) => {
+          // auto scroll to error field
+          const errorFirst = this.$el.querySelector('input.is-danger, select.is-danger');
+          if (errorFirst) {
+            errorFirst.scrollIntoView({ behavior: 'instant' });
+            errorFirst.focus();
+          }
+          console.error(errMsg);
+          swal(
+            '請檢查填寫的資料',
+            '您填寫的資料可能有誤，請確認有無漏填',
+            'warning',
+          );
+        });
+    } else {
+      next();
+    }
   },
 };
 </script>

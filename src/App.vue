@@ -2,28 +2,37 @@
   div#app
     Logo
     h1.title {{ donationType }}
+    ProgressBar(ref="ProgressBar")
     //- 換頁動畫
     //- https://router.vuejs.org/zh-cn/advanced/transitions.html
     transition(name="fade", mode="out-in")
-      router-view(@emitFormData="getFormData")
+      router-view(@emitFormData="getFormData", @emitProgress="updateProgress")
 </template>
 
 <script>
 import Logo from './components/Logo.vue';
+import ProgressBar from './components/Progress-bar.vue';
 
 export default {
   data() {
     return {
       donationType: '單次捐款',
       formData: '',
+      progress: 1,
     };
   },
   components: {
     Logo,
+    ProgressBar,
   },
   methods: {
     getFormData(data) {
       this.formData = JSON.parse(JSON.stringify(data));
+    },
+    updateProgress(progress) {
+      console.log(this);
+      this.progress = progress;
+      this.$refs.ProgressBar.progress = this.progress;
     },
   },
 };
