@@ -29,6 +29,12 @@ const dict = {
       receiptAddress: {
         required: '收據地址必填',
       },
+      dateS: {
+        required: '此欄位必填',
+      },
+      dateE: {
+        required: '此欄位必填',
+      },
     },
   },
 };
