@@ -6,7 +6,7 @@
     //- 換頁動畫
     //- https://router.vuejs.org/zh-cn/advanced/transitions.html
     transition(name="fade", mode="out-in")
-      router-view(@emitFormData="getFormData", @emitProgress="updateProgress")
+      router-view
 </template>
 
 <script>
@@ -16,24 +16,22 @@ import ProgressBar from './components/Progress-bar.vue';
 export default {
   data() {
     return {
-      pageTitle: '單次捐款',
-      formData: '',
-      progress: 1,
     };
+  },
+  mounted() {
+  },
+  computed: {
+    pageTitle: {
+      get() {
+        return this.$store.state.pageTitle;
+      },
+    },
   },
   components: {
     Logo,
     ProgressBar,
   },
   methods: {
-    getFormData(data) {
-      this.formData = JSON.parse(JSON.stringify(data));
-    },
-    updateProgress(progress) {
-      console.log(this);
-      this.progress = progress;
-      this.$refs.ProgressBar.progress = this.progress;
-    },
   },
 };
 </script>

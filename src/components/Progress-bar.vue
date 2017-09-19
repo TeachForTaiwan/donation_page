@@ -16,8 +16,14 @@
 export default {
   data() {
     return {
-      progress: this.$parent.progress || 1,
     };
+  },
+  computed: {
+    progress: {
+      get() {
+        return this.$store.state.progress;
+      },
+    },
   },
 };
 </script>

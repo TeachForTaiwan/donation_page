@@ -44,24 +44,18 @@
 export default {
   data() {
     return {
-      formData: this.$parent.formData || {
-        name: '',
-        code: '',
-        idNumber: '',
-        gender: '',
-        birth: '',
-        tel: '',
-        email: '',
-        address: '',
-        receipt: '',
-        receiptTitle: '',
-        receiptAddress: '',
-        campaign: '',
-        newsletter: '',
-        amount: '',
-        paymentType: '',
-      },
     };
+  },
+  computed: {
+    formData: {
+      get() {
+        return this.$store.state.formData;
+      },
+    },
+  },
+  mounted() {
+    this.$store.commit('updatePageTitle', '單次捐款');
+    this.$store.commit('updateProgress', 2);
   },
 };
 </script>

@@ -3,6 +3,7 @@ import VeeValidate, { Validator } from 'vee-validate';
 import './sass/main.scss'; // main style
 import App from './App.vue';
 import router from './router';
+import store from './store';
 
 Vue.use(VeeValidate);
 
@@ -35,6 +36,15 @@ const dict = {
       dateE: {
         required: '此欄位必填',
       },
+      amountSel: {
+        required: '請選擇或輸入捐款金額',
+      },
+      amountInput: {
+        required: '請輸入捐款金額',
+      },
+      method: {
+        required: '請選擇付款方式',
+      },
     },
   },
 };
@@ -42,8 +52,13 @@ Validator.updateDictionary(dict);
 Validator.setLocale('zh_TW');
 
 /* eslint-disable no-new */
-new Vue({
+const app = new Vue({
   el: 'app',
   router,
-  components: { App },
+  store,
+  render: h => h(App),
 });
+
+export default app;
+
+window.store = store;

@@ -39,7 +39,7 @@
         option(value="其他") 其他
     label.label(for="birth")
       span.text 出生日期
-      input#birth.input(type="date", v-model="formData.birth")
+      input#birth.input(name="birth", type="date", v-model="formData.birth")
     label.label(for="tel")
       span.text 聯絡電話*
       p.control
@@ -71,6 +71,7 @@
         select#county.select(
           name="county",
           :class="{ 'is-danger': errors.has('county') }",
+          @change="updateReceiptData",
           v-model="formData.county",
           v-validate="'required'"
           )
@@ -78,6 +79,7 @@
         select#district.select(
           name="district",
           :class="{ 'is-danger': errors.has('district') }",
+          @change="updateReceiptData",
           v-model="formData.district",
           v-validate="'required'"
           )
@@ -86,6 +88,7 @@
           name="address",
           type="text",
           :class="{ 'is-danger': errors.has('address') }",
+          @change="updateReceiptData",
           placeholder="請輸入地址",
           v-model="formData.address",
           v-validate="'required'"
@@ -116,9 +119,8 @@
           )
         span.help.is-danger(v-show="errors.has('receiptTitle')") {{ errors.first('receiptTitle') }}
     label.label.label--checkbox(
-      v-if="formData.county && formData.district && formData.address",
       for="receipt-check",
-      :class="{ 'is-checked': receiptCheck }",
+      :class="{ 'is-checked': formData.receiptCheck }",
       @click.prevent="handleReceiptCheck"
       )
       .radio-container
@@ -126,21 +128,19 @@
           input#receipt-check.input(type="checkbox")
       span.text 收據資訊同通訊資訊
     transition(name="height")
-      label.label(role="tw-city-selector--receipt", v-show="!receiptCheck")
+      label.label(role="tw-city-selector--receipt", v-show="!formData.receiptCheck")
         span.text 收據地址*
         .input-set
           select#receipt-county.select(
             name="receiptCounty",
             :class="{ 'is-danger': errors.has('receiptCounty') }",
             v-model="formData.receiptCounty",
-            v-validate="'required'"
             )
             //- option(selected, disabled) 縣市
           select#receipt-district.select(
             name="receiptDistrict",
             :class="{ 'is-danger': errors.has('receiptDistrict') }",
             v-model="formData.receiptDistrict",
-            v-validate="'required'"
             )
             //- option(selected, disabled) 鄉鎮市區
           input#receipt-address.input(
@@ -157,28 +157,48 @@
       .radio-container
         label.label.label--radio(for="campaign-1", :class="{ 'is-checked': formData.campaign === 'true' }")
           .radio
-            input#campaign-1.input(name="campaign", type="radio", value="true", v-model="formData.campaign")
+            input#campaign-1.input(
+              name="campaign",
+              type="radio",
+              value="true",
+              v-model="formData.campaign"
+              )
           span.text 是
         label.label.label--radio(for="campaign-2", :class="{ 'is-checked': formData.campaign === 'false' }")
           .radio
-            input#campaign-2.input(name="campaign", type="radio", value="false", v-model="formData.campaign")
+            input#campaign-2.input(
+              name="campaign",
+              type="radio",
+              value="false",
+              v-model="formData.campaign"
+              )
           span.text 否
     .label-wrap
       span.text 是否願意訂閱TFT電子報？
       .radio-container
         label.label.label--radio(for="newsletter-1", :class="{ 'is-checked': formData.newsletter === 'true' }")
           .radio
-            input#newsletter-1.input(name="newsletter", type="radio", value="true", v-model="formData.newsletter")
+            input#newsletter-1.input(
+              name="newsletter",
+              type="radio",
+              value="true",
+              v-model="formData.newsletter"
+              )
           span.text 是
         label.label.label--radio(for="newsletter-2", :class="{ 'is-checked': formData.newsletter === 'false' }")
           .radio
-            input#newsletter-2.input(name="newsletter", type="radio", value="false", v-model="formData.newsletter")
+            input#newsletter-2.input(
+              name="newsletter",
+              type="radio",
+              value="false",
+              v-model="formData.newsletter"
+              )
           span.text 否
     .btn-container
       router-link.btn.btn--grey(to="single")
-        span(@click="emitFormData() + emitProgress(1)") 回上一步
+        span 回上一步
       router-link.btn(to="single-check")
-        span(@click="emitFormData() + emitProgress(3)") 下一步
+        span 下一步
 </template>
 
 <script>
@@ -189,41 +209,28 @@ export default {
   data() {
     return {
       receiptCheck: false,
-      formData: this.$parent.formData || {
-        name: '', // *
-        code: '',
-        idNumber: '',
-        gender: '',
-        birth: '',
-        tel: '', // *
-        email: '', // *
-        county: '', // *
-        district: '', // *
-        address: '', // *
-        receipt: '', // *
-        receiptTitle: '', // *
-        receiptCounty: '', // *
-        receiptDistrict: '', // *
-        receiptAddress: '', // *
-        campaign: 'true',
-        newsletter: 'true',
-        amount: '',
-        paymentType: '',
-      },
     };
   },
+  computed: {
+    formData: {
+      get() {
+        return this.$store.state.formData;
+      },
+    },
+  },
   methods: {
+    updateReceiptData() {
+      if (this.formData.receiptCheck) {
+        this.formData.receiptCounty = this.formData.county;
+        this.formData.receiptDistrict = this.formData.district;
+        this.formData.receiptAddress = this.formData.address;
+      }
+    },
     handleReceiptCheck() {
-      this.receiptCheck = !this.receiptCheck;
       this.formData.receiptCounty = this.formData.county;
       this.formData.receiptDistrict = this.formData.district;
       this.formData.receiptAddress = this.formData.address;
-    },
-    emitFormData() {
-      this.$emit('emitFormData', this.formData);
-    },
-    emitProgress(progress) {
-      this.$emit('emitProgress', progress);
+      this.formData.receiptCheck = !this.formData.receiptCheck;
     },
     validateForm() {
       return new Promise((resolve, reject) => {
@@ -243,7 +250,8 @@ export default {
   },
   mounted() {
     /* eslint-disable no-new */
-
+    this.$store.commit('updatePageTitle', '單次捐款');
+    this.$store.commit('updateProgress', 2);
     // address
     new TWCitySelector({
       el: '[role="tw-city-selector"]',
@@ -260,7 +268,11 @@ export default {
   beforeRouteLeave(to, from, next) {
     if (to.path === '/single-check') {
       this.validateForm()
-        .then(next)
+        .then(() => {
+          this.$store.commit('updateFormData', this.formData);
+          sessionStorage.setItem('formData', JSON.stringify(this.formData));
+          next();
+        })
         .catch((errMsg) => {
           // auto scroll to error field
           const errorFirst = this.$el.querySelector('input.is-danger, select.is-danger');

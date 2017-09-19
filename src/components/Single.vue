@@ -10,21 +10,21 @@
       li.item 如對線上捐款機制有任何疑問，請洽 02-2345-6225。
     .btn-container
       router-link.btn(to="single-form")
-        span(@click="emitProgress(2)") 我知道了
+        span 我知道了
 </template>
 
 <script>
 export default {
   name: 'single',
-  progress: 1,
   data() {
     return {
     };
   },
+  mounted() {
+    this.$store.commit('updatePageTitle', '單次捐款');
+    this.$store.commit('updateProgress', 1);
+  },
   methods: {
-    emitProgress(progress) {
-      this.$emit('emitProgress', progress);
-    },
   },
 };
 </script>
