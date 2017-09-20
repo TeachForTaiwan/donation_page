@@ -12,6 +12,39 @@
         figure.figure
           img.icon(src="../assets/icon_regular.png", alt="定期定額捐款")
           figcaption.text 定期定額捐款
+    v-collapsible(expandable)
+      li
+        v-collapsible-header
+          .link.btn-block.is-primary 其他捐款方式
+        v-collapsible-body
+          v-collapsible(expandable).collapsible-sub
+            li
+              v-collapsible-header
+                .c-header 郵政劃撥
+              v-collapsible-body
+                p 戶名：社團法人台灣為台灣而教協會
+                p 劃撥帳號：22770108
+                p 請您至郵局索取劃撥單，並請詳細填寫捐款人聯絡資料，完成劃撥。
+            li
+              v-collapsible-header
+                .c-header 銀行匯款
+              v-collapsible-body
+                p 匯款銀行：國泰世華銀行忠孝分行 (銀行代號013)
+                p 匯款帳號：011-03-500962-2
+                p 請您至任何一家銀行匯款，匯款完成後請務必來電告知以便本會開立收據。
+            li
+              v-collapsible-header
+                .c-header 郵寄支票
+              v-collapsible-body
+                p 請您將支票寄至「11071 台北市信義區忠孝東路四段512號11樓之4  財團法人為台灣而教教育基金會」，並於背面註明禁止背書轉讓。
+            li
+              v-collapsible-header
+                .c-header 海外捐款
+              v-collapsible-body
+                p.list-title 美金
+                p 透過「世台聯合基金會（STUF United Fund Inc., 簡稱世台會或 STUF）」捐款。 世台會為在美國登記成立之非營利慈善機構，為美國聯邦政府核可之 501(c)(3) 組織。由世台基金會開立的捐贈收據，在美國都可依法扣抵聯邦所得稅。
+                p.list-title 非美金
+                p 請您連線至 Ammado 外幣捐款網站 https://www.ammado.com/ 並指定捐款 Teach For Taiwan。
     router-link.link.btn-block.is-primary(to="credit-check")
       span 捐款徵信
     h3.title.title--sub 其他支持方式
@@ -30,6 +63,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -46,6 +80,8 @@ export default {
         usage: '', // 捐款用途
       },
     };
+  },
+  components: {
   },
   mounted() {
     this.$store.commit('updatePageTitle', '支持 TFT');
@@ -69,6 +105,7 @@ export default {
 }
 
 .link {
+  cursor: pointer;
   &:after {
     display: none;
   }
@@ -162,6 +199,56 @@ export default {
   }
   @include for-phone-only {
     font-size: calc(3vw + 6px);
+  }
+}
+
+.collapsible {
+  border: none;
+  box-shadow: none;
+  margin: 10px 0 20px;
+  .collapsible {
+    margin: 0;
+  }
+  .btn-block {
+    margin: 0;
+  }
+  li {
+    padding: 0;
+  }
+  .collapsible-header {
+    padding: 0;
+    text-align: center;
+    font-size: 20px;
+    @include for-phone-only {
+      font-size: calc(3vw + 6px);
+    }
+    cursor: pointer;
+    .c-header {
+      background: #9B9B9B;
+      color: #FFF;
+      padding: .3em 0;
+      transition: .1s ease-in-out;
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
+  .collapsible-body {
+    background: #E9E9E9;
+    color: #57585A;
+    p {
+      padding: 0;
+      margin: 0;
+    }
+    .list-title {
+      font-weight: bold;
+    }
+  }
+}
+
+.collapsible-sub {
+  .collapsible-body {
+    padding: 1em 2em;
   }
 }
 </style>
