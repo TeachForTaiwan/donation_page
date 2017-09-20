@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BabiliPlugin = require("babili-webpack-plugin");
 const webpack = require('webpack');
 
 function resolve (dir) {
@@ -84,6 +85,7 @@ module.exports = {
       disable: false,
       allChunks: true
     }),
+    new BabiliPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ]
 };
