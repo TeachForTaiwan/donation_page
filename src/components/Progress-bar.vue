@@ -1,5 +1,5 @@
 <template lang="pug">
-  .progress-bar
+  .progress-bar(v-show="progress !== 'hide'")
     .progress-item.step-1(:class="{ 'is-active': progress >= 1, 'is-current': progress == 1 }")
       .circle
       .text {{ progressText.step1 }}

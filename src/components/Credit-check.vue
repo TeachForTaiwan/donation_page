@@ -39,19 +39,21 @@
       .btn-container
         .btn(@click="handleSearch") 查詢
     .result
-      ul.result__head
-        li.item 捐款日期
-        li.item 收據編號
-        li.item 捐款人
-        li.item 捐款金額
-        li.item 捐款用途
-      ul.result__data
-        li.item {{ result.date }}
-        li.item {{ result.number }}
-        li.item {{ result.name }}
-        li.item {{ result.amount }}
-        li.item {{ result.usage }}
-
+      table.table(summary="捐款（贈）明細條列")
+        thead.thead
+          tr
+            th 捐款日期
+            th 收據編號
+            th 捐款人
+            th 捐款金額
+            th 捐款用途
+        tbody.tbody
+          tr
+            td {{ result.date }}
+            td {{ result.number }}
+            td {{ result.name }}
+            td {{ result.amount }}
+            td {{ result.usage }}
 </template>
 
 <script>
@@ -66,13 +68,17 @@ export default {
         name: '',
       },
       result: {
-        date: '',
-        number: '123',
-        name: 'testName',
-        amount: '500',
-        usage: 'M/4wj6',
+        date: '', // 捐款日期
+        receiptNumber: '', // 收據編號
+        name: '', // 捐款人
+        amount: '', // 捐款金額
+        usage: '', // 捐款用途
       },
     };
+  },
+  mounted() {
+    this.$store.commit('updatePageTitle', '捐款徵信');
+    this.$store.commit('updateProgress', 'hide');
   },
   methods: {
     validateForm() {
@@ -136,22 +142,23 @@ export default {
   margin: 0 auto 150px;
   font-size: 14px;
   color: #57585a;
-  &__head {
-    display: flex;
-    justify-content: space-around;
-    border-bottom: 2px solid #979797;
-    padding: 1em 0;
-    .item {
-      flex: 1;
-      text-align: center;
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    word-break: break-all;
+    .thead {
+      th {
+        color: #57585a;
+        font-weight: normal;
+        padding: 10px 0;
+      }
+      border-bottom: 2px solid #979797;
     }
-  }
-  &__data {
-    display: flex;
-    justify-content: space-around;
-    .item {
-      flex: 1;
-      text-align: center;
+    td {
+      color: #57585a;
+      max-width: 200px;
+      padding: 10px 0;
     }
   }
 }
