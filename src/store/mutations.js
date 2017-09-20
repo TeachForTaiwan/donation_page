@@ -25,6 +25,10 @@ export const state = {
     newsletter: 'true',
     amount: '',
     paymentType: '',
+    card: '', // *
+    cardNumber: '', // *
+    expireM: '', // *
+    expireY: '', // *
   },
 };
 

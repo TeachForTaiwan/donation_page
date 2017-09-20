@@ -1,55 +1,69 @@
 <template lang="pug">
   #regular-payment
     form#form.form
-      label.label(for="amount-sel")
-        span.text 捐款金額*
-        p.control
-          select#amount-sel.select(
-            name="amountSel",
-            :class="{ 'is-danger': errors.has('amountSel') }"
-            v-model="formData.amount",
-            v-validate="rules"
-            )
-            option(value="", disabled, hidden) 請選擇
-            option(value="100") 100
-            option(value="200") 200
-            option(value="500") 500
-            option(value="1000") 1000
-            option(value="2000") 2000
-            option(value="5000") 5000
-            option(value="10000") 10000
-            option(value="20000") 20000
-            option(value="other") 其它
-          input#amount-input.input(
-            name="amountInput",
+      label.label(for="amount")
+        span.text 每月固定捐款金額*
+        .control
+          input#amount.input(
+            name="amount",
             type="number",
             min="100",
-            @change="updateAmount",
-            :class="{ 'is-danger': errors.has('amountInput') }"
+            :class="{ 'is-danger': errors.has('amount') }"
             placeholder="請輸入捐款金額",
-            v-show="amountInput",
-            v-validate="rulesInput"
-            )
-          span.help.is-danger(v-show="errors.has('amountSel')") {{ errors.first('amountSel') }}
-          span.help.is-danger(v-show="errors.has('amountInput')") {{ errors.first('amountInput') }}
-      label.label
-        span.text 付款方式*
-        p.control
-          select#method.select(
-            name="method",
-            :class="{ 'is-danger': errors.has('method') }"
-            v-model="formData.paymentType"
+            v-model="formData.amount",
+            v-validate="'required'",
+          )
+          span.help.is-danger(v-show="errors.has('amount')") {{ errors.first('amount') }}
+      label.label(for="card")
+        span.text 信用卡別*
+        .control
+          select#card.select(
+            name="card",
+            :class="{ 'is-danger': errors.has('card') }"
+            v-model="formData.card"
             v-validate="'required'"
+          )
+            option(value="", disabled, hidden) 請選擇信用卡別
+            option(value="VISA") VISA
+            option(value="Master") Master
+            option(value="JCB") JCB
+          span.help.is-danger(v-show="errors.has('card')") {{ errors.first('card') }}
+      label.label(for="card-number")
+        span.text 信用卡號*
+        .control
+          input#card-number.input(
+            name="cardNumber",
+            type="number",
+            :class="{ 'is-danger': errors.has('cardNumber') }"
+            placeholder="請輸入卡號",
+            v-model="formData.cardNumber",
+            v-validate="'required'"
+          )
+          span.help.is-danger(v-show="errors.has('cardNumber')") {{ errors.first('cardNumber') }}
+      label.label
+        span.text 有效月年*
+        .control
+          .input-set
+            select#expire-m.select(
+              name="expireM",
+              :class="{ 'is-danger': errors.has('expireM') }"
+              v-model="formData.expireM"
+              v-validate="'required'"
             )
-            option(value="", disabled, hidden) 請選擇付款方式
-            option(value="0") 信用卡
-            option(value="1") Web-ATM
-            option(value="2") 銀行虛擬帳號
-            option(value="3") 超商條碼
-            option(value="4") 全家 FamiPort
-            option(value="5") 萊爾富 Life-ET
-            option(value="6") OK 超商 OK-GO
-          span.help.is-danger(v-show="errors.has('method')") {{ errors.first('method') }}
+              option(value="", disabled, hidden) 月
+              - for (var x = 1; x <= 12; x++)
+                option(value=x) #{x}
+            span(style="padding:0 .5em;") /
+            select#expire-y.select(
+              name="expireY",
+              :class="{ 'is-danger': errors.has('expireY') }",
+              v-model="formData.expireY",
+              v-validate="'required'",
+            )
+              option(value="", disabled, hidden) 年
+              - for (var x = 17; x <= 37; x++)
+                option(value='20'+x) #{x}
+          span.help.is-danger(v-show="errors.has('expireM') || errors.has('expireY')") {{ errors.first('expireM') || errors.first('expireY') }}
       .btn-container
         router-link.btn.btn--grey(to="regular-check") 回上一步
         router-link.btn(to="/") 確認付款
@@ -71,12 +85,6 @@ export default {
     amountInput() {
       const amountSelects = ['100', '200', '500', '1000', '2000', '5000', '10000', '20000'];
       return amountSelects.includes(this.formData.amount) ? '' : true;
-    },
-    rules() {
-      return !this.formData.amount.length ? 'required' : false;
-    },
-    rulesInput() {
-      return this.formData.amount === 'other' ? 'required' : false;
     },
   },
   mounted() {
@@ -144,4 +152,15 @@ export default {
 <style lang="scss" scoped>
 @import url(../../node_modules/sweetalert2/dist/sweetalert2.min.css);
 // edit style in sass/module/_form.scss
+.form{
+  .label{
+    .input-set{
+      width: 100%;
+        align-items: center;
+        >.select{
+          margin: 0;
+        }
+    }
+  }
+}
 </style>

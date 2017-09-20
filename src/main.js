@@ -45,6 +45,22 @@ const dict = {
       method: {
         required: '請選擇付款方式',
       },
+      // 定期定額
+      amount: {
+        required: '請輸入捐款金額',
+      },
+      card: {
+        required: '請選擇信用卡別',
+      },
+      cardNumber: {
+        required: '請輸入卡號',
+      },
+      expireM: {
+        required: '請選擇有效月年',
+      },
+      expireY: {
+        required: '請選擇有效月年',
+      },
     },
   },
 };
