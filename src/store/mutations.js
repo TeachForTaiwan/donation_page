@@ -4,6 +4,11 @@
 export const state = {
   pageTitle: '', // 主標題
   progress: '', // 進度條
+  progressText: {
+    step1: '捐款說明',
+    step2: '填寫基本資料',
+    step3: '選擇付款方式',
+  },
   formData: JSON.parse(sessionStorage.getItem('formData')) || {
     name: '', // *
     code: '',
@@ -17,7 +22,7 @@ export const state = {
     address: '', // *
     receipt: '', // *
     receiptTitle: '', // *
-    receiptCheck: true,
+    receiptCheck: 'true',
     receiptCounty: '', // *
     receiptDistrict: '', // *
     receiptAddress: '', // *
@@ -38,6 +43,9 @@ export const mutations = {
   },
   updateProgress(state, step) {
     state.progress = step;
+  },
+  updateProgressText(state, step) {
+    state.progressText = step;
   },
   updateFormData(state, data) {
     state.formData = data;

@@ -2,13 +2,13 @@
   .progress-bar
     .progress-item.step-1(:class="{ 'is-active': progress >= 1, 'is-current': progress == 1 }")
       .circle
-      .text 捐款說明
+      .text {{ progressText.step1 }}
     .progress-item.step-2(:class="{ 'is-active': progress >= 2, 'is-current': progress == 2 }")
       .circle
-      .text 填寫基本資料
+      .text {{ progressText.step2 }}
     .progress-item.step-3(:class="{ 'is-active': progress >= 3, 'is-current': progress == 3 }")
       .circle
-      .text 選擇付款方式
+      .text {{ progressText.step3 }}
 
 </template>
 
@@ -22,6 +22,11 @@ export default {
     progress: {
       get() {
         return this.$store.state.progress;
+      },
+    },
+    progressText: {
+      get() {
+        return this.$store.state.progressText;
       },
     },
   },

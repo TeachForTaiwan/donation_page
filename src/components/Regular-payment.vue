@@ -11,7 +11,7 @@
             :class="{ 'is-danger': errors.has('amount') }"
             placeholder="請輸入捐款金額",
             v-model="formData.amount",
-            v-validate="'required'",
+            v-validate="'required|min_value:100'",
           )
           span.help.is-danger(v-show="errors.has('amount')") {{ errors.first('amount') }}
       label.label(for="card")
@@ -37,7 +37,7 @@
             :class="{ 'is-danger': errors.has('cardNumber') }"
             placeholder="請輸入卡號",
             v-model="formData.cardNumber",
-            v-validate="'required'"
+            v-validate="'required|digits:16'"
           )
           span.help.is-danger(v-show="errors.has('cardNumber')") {{ errors.first('cardNumber') }}
       label.label
@@ -62,11 +62,23 @@
             )
               option(value="", disabled, hidden) 年
               - for (var x = 17; x <= 37; x++)
-                option(value='20'+x) #{x}
+                option(value='20'+x) 20#{x}
           span.help.is-danger(v-show="errors.has('expireM') || errors.has('expireY')") {{ errors.first('expireM') || errors.first('expireY') }}
+      label.label(for="card-check-number")
+        span.text 卡片背面末 3 碼*
+        .control
+          input#card-check-number.input(
+            name="cardCheckNumber",
+            type="number",
+            :class="{ 'is-danger': errors.has('cardCheckNumber') }"
+            placeholder="請輸入末 3 碼",
+            v-model="formData.cardCheckNumber",
+            v-validate="'required|digits:3'"
+          )
+          span.help.is-danger(v-show="errors.has('cardCheckNumber')") {{ errors.first('cardCheckNumber') }}
       .btn-container
         router-link.btn.btn--grey(to="regular-check") 回上一步
-        router-link.btn(to="/") 確認付款
+        router-link.btn(to="/") 確認授權
 </template>
 <script>
 import swal from 'sweetalert2';

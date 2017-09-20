@@ -24,6 +24,11 @@ export default {
   mounted() {
     this.$store.commit('updatePageTitle', '定期定額捐款');
     this.$store.commit('updateProgress', 1);
+    this.$store.commit('updateProgressText', {
+      step1: '捐款說明',
+      step2: '填寫基本資料',
+      step3: '信用卡授權',
+    });
   },
   methods: {
   },

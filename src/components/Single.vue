@@ -23,6 +23,11 @@ export default {
   mounted() {
     this.$store.commit('updatePageTitle', '單次捐款');
     this.$store.commit('updateProgress', 1);
+    this.$store.commit('updateProgressText', {
+      step1: '捐款說明',
+      step2: '填寫基本資料',
+      step3: '選擇付款方式',
+    });
   },
   methods: {
   },

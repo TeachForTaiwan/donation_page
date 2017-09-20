@@ -3,7 +3,7 @@
   form#form.form
     label.label(for="name")
       span.text 姓名／單位名稱*
-      p.control
+      .control
         input#name.input(
           name="name",
           type="text",
@@ -11,25 +11,33 @@
           placeholder="請輸入姓名／單位名稱",
           v-model="formData.name",
           v-validate="'required'",
-          )
+        )
         span.help.is-danger(v-show="errors.has('name')") {{ errors.first('name') }}
     label.label(for="code", placeholder="請輸入企業代碼")
       span.text 企業代碼
-      input#code.input(
-        name="code",
-        type="text",
-        placeholder="請輸入企業代碼"
-        v-model="formData.code",
+      .control
+        input#code.input(
+          name="code",
+          type="text",
+          :class="{ 'is-danger': errors.has('code') }"
+          placeholder="請輸入企業代碼"
+          v-model="formData.code",
+          v-validate="'max:20'",
         )
+        span.help.is-danger(v-show="errors.has('code')") {{ errors.first('code') }}
     label.label(for="id-number")
       span.text 身分證字號／統一編號
-      input#id-number.input(
-        name="idNumber",
-        type="text",
-        autocomplete="off",
-        placeholder="請輸入身分證字號／統一編號",
-        v-model="formData.idNumber"
+      .control
+        input#id-number.input(
+          name="idNumber",
+          type="text",
+          :class="{ 'is-danger': errors.has('idNumber') }"
+          autocomplete="off",
+          placeholder="請輸入身分證字號／統一編號",
+          v-model="formData.idNumber",
+          v-validate="'max:10'",
         )
+        span.help.is-danger(v-show="errors.has('idNumber')") {{ errors.first('idNumber') }}
     label.label(for="gender")
       span.text 性別
       select#gender.select(v-model="formData.gender")

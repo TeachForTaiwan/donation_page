@@ -14,6 +14,12 @@ const dict = {
       name: {
         required: '此欄位必填',
       },
+      code: {
+        max: '請輸入正確的企業代碼',
+      },
+      idNumber: {
+        max: '請輸入正確的身分證字號／統一編號',
+      },
       tel: {
         required: '此欄位必填',
       },
@@ -48,18 +54,24 @@ const dict = {
       // 定期定額
       amount: {
         required: '請輸入捐款金額',
+        min_value: '捐款金額至少為 100 元',
       },
       card: {
         required: '請選擇信用卡別',
       },
       cardNumber: {
         required: '請輸入卡號',
+        digits: '請輸入正確的卡號',
       },
       expireM: {
         required: '請選擇有效月年',
       },
       expireY: {
         required: '請選擇有效月年',
+      },
+      cardCheckNumber: {
+        required: '請輸入末 3 碼',
+        digits: '請輸入末 3 碼',
       },
     },
   },
