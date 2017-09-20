@@ -37,6 +37,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title{
+  margin: 1.5em auto;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity .5s
