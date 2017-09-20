@@ -10,6 +10,15 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 1.5rem auto;
+    margin: 0 auto;
+    line-height: 2;
+  }
+  .item {
+    .title {
+      &:after {
+        content: '|';
+        padding: .3em;
+      }
+    }
   }
 }
