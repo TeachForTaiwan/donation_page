@@ -39,4 +39,7 @@ main {
   min-height: 100vh;
   margin: 0 auto;
   background: $c-base;
+  @include for-phone-only {
+    margin-top: 50px;
+  }
 }

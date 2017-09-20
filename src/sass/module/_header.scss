@@ -1,3 +1,11 @@
+@mixin nthAfter($n) {
+  &:nth-child(#{$n}) {
+    &:after {
+      @content;
+    }
+  }
+}
+
 .header {
   background: $c-grey-3;
   color: $c-grey-2;
@@ -10,18 +18,95 @@
     justify-content: flex-end;
     align-items: center;
     margin: 0;
+    z-index: 9;
+    @include for-phone-only {
+      position: absolute;
+      width: 100%;
+      flex-direction: column;
+      background: #E9E9E9;
+      color: #57585A;
+      transition: .5s ease-in-out;
+      transform: translateY(calc(-100% + 50px));
+      left: 0;
+      top: 0;
+      &.is-active {
+        transform: translateY(0);
+        .item.menu-toggle {
+          .link .line {
+            opacity: .7;
+            @include nthAfter(1) {
+              transform: rotate(45deg) translate(3px, 4px);
+            }
+            @include nthAfter(2) {
+              transform: scale(0);
+            }
+            @include nthAfter(3) {
+              transform: rotate(-45deg) translate(3px, -4px);
+            }
+          }
+        }
+      }
+    }
     .item {
       padding: 0;
+      @include for-phone-only {
+        width: 100%;
+        text-align: center;
+      }
+      &.menu-toggle {
+        display: none;
+        text-align: right;
+        .link {
+          height: 50px;
+          padding: 0;
+          .line {
+            position: relative;
+            &:after {
+              content: '';
+              position: absolute;
+              width: 35px;
+              height: 2px;
+              background: #57585A;
+              right: 10px;
+              transition: .3s ease-in-out;
+            }
+            @include nthAfter(1) {
+              top: 20px;
+            }
+            @include nthAfter(2) {
+              top: 25px;
+            }
+            @include nthAfter(3) {
+              top: 30px;
+            }
+          }
+        }
+        @include for-phone-only {
+          display: block;
+        }
+      }
       .link {
         display: block;
-        padding: 8px 20px;
+        padding: 8px 15px;
         transition: .1s ease-in-out;
+        cursor: pointer;
+        @include for-phone-only {
+          padding: 1em 15px;
+        }
+        @include for-tablet-landscape-up {
+          padding: 8px 20px;
+        }
         &:after {
           display: none;
         }
         &:hover {
           background: $c-primary;
           color: $c-base;
+          .line {
+            &:after {
+              background: $c-base;
+            }
+          }
         }
       }
     }

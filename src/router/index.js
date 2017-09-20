@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Materials from 'vue-materials';
+// components
 import Support from '../components/Support.vue';
 import Single from '../components/Single.vue';
 import SingleForm from '../components/Single-form.vue';

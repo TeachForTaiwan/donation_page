@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import VeeValidate, { Validator } from 'vee-validate';
-import './sass/main.scss'; // main style
 import App from './App.vue';
 import router from './router';
 import store from './store';
+// custom js
+import './js/header';
+// custom style
+import './sass/main.scss';
 
 Vue.use(VeeValidate);
 
