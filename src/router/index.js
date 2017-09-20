@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Support from '../components/Support.vue';
 import Single from '../components/Single.vue';
 import SingleForm from '../components/Single-form.vue';
 import SingleCheck from '../components/Single-check.vue';
@@ -17,7 +18,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Single,
+      component: Support,
     },
     {
       path: '/single',
@@ -63,7 +64,7 @@ export default new Router({
     },
     {
       path: '/*',
-      redirect: '/single',
+      redirect: '/',
     },
   ],
 });
