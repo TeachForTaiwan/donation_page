@@ -37,7 +37,7 @@ export default {
 @import '../sass/variable';
 .progress-bar {
   max-width: 500px;
-  margin: 30px auto 60px;
+  margin: 30px auto 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

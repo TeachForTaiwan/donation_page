@@ -40,17 +40,18 @@
         span.help.is-danger(v-show="errors.has('idNumber')") {{ errors.first('idNumber') }}
     label.label(for="gender")
       span.text 性別
-      select#gender.select(v-model="formData.gender")
-        option(value="", disabled, hidden) 請選擇性別
-        option(value="男") 男
-        option(value="女") 女
-        option(value="其他") 其他
+      .control
+        select#gender.select(v-model="formData.gender")
+          option(value="", disabled, hidden) 請選擇性別
+          option(value="男") 男
+          option(value="女") 女
+          option(value="其他") 其他
     label.label(for="birth")
       span.text 出生日期
       input#birth.input(name="birth", type="date", v-model="formData.birth")
     label.label(for="tel")
       span.text 聯絡電話*
-      p.control
+      .control
         input#tel.input(
           name="tel",
           type="tel",
@@ -63,7 +64,7 @@
         span.help.is-danger(v-show="errors.has('tel')") {{ errors.first('tel') }}
     label.label(for="email")
       span.text 電子信箱*
-      p.control
+      .control
         input#email.input(
           name="email",
           type="email",
@@ -116,7 +117,7 @@
         option(value="不寄收據") 不寄收據
     label.label(for="receipt-title")
       span.text 收據抬頭*
-      p.control
+      .control
         input#receipt-title.input(
           name="receiptTitle",
           type="text",
