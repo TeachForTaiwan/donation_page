@@ -37,6 +37,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../sass/variable';
+@import '../sass/mixin/breakpoint';
 #single {
   max-width: 500px;
   margin: 50px auto 80px;
@@ -47,6 +48,11 @@ export default {
   .item {
     line-height: 1.71;
     margin: .5em auto;
+    @include for-phone-only{
+      margin-left: 2em;
+      margin-right: .5em;
+      padding: 0;
+    }
   }
 }
 

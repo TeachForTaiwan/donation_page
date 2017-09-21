@@ -62,6 +62,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../sass/variable';
+@import '../sass/mixin/breakpoint';
 #single-check {
   display: flex;
   flex-direction: column;
@@ -99,8 +100,13 @@ export default {
   color: $c-white;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px auto;
   .btn {
     margin: 20px;
+    @include for-phone-only {
+      margin: 10px;
+    }
   }
 }
 

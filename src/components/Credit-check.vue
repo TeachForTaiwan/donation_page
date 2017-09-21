@@ -116,10 +116,14 @@ export default {
 
 <style lang="scss" scoped>
 @import url(../../node_modules/sweetalert2/dist/sweetalert2.min.css);
+@import '../sass/mixin/breakpoint';
 .form {
   max-width: 580px;
   .label {
     align-items: center;
+    @include for-phone-only {
+      align-items: flex-start;
+    }
   }
 }
 
@@ -128,12 +132,16 @@ export default {
 }
 
 .btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include for-phone-only {
+    justify-content: flex-start;
+    margin: 30px 0;
+  }
   .btn {
     padding: 0.5em 4em;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 
