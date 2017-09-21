@@ -13,6 +13,7 @@
     "file-loader": "^0.11.2",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
+    "json-server": "^0.12.0",
     "node-sass": "^4.5.3",
     "pug": "^2.0.0-rc.4",
     "pug-html-loader": "^1.1.5",
@@ -34,9 +35,14 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "dev": "webpack-dev-server --open"
+    "dev": "webpack-dev-server --open",
+    "mock": "json-server --watch mock/db.json --m mock/post-to-get.js",
+    "mock-faker": "json-server --watch mock/faker-data.js",
+    "mock-dev": "yarn run mockfaker | yarn run dev"
   },
   "dependencies": {
+    "faker": "^4.1.0",
+    "lodash": "^4.17.4",
     "sweetalert2": "^6.9.0",
     "tw-city-selector": "^1.0.9",
     "vee-validate": "^2.0.0-rc.14",
