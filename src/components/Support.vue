@@ -41,10 +41,29 @@
               v-collapsible-header
                 .c-header 海外捐款
               v-collapsible-body
-                p.list-title 美金
-                p 透過「世台聯合基金會（STUF United Fund Inc., 簡稱世台會或 STUF）」捐款。 世台會為在美國登記成立之非營利慈善機構，為美國聯邦政府核可之 501(c)(3) 組織。由世台基金會開立的捐贈收據，在美國都可依法扣抵聯邦所得稅。
-                p.list-title 非美金
-                p 請您連線至 Ammado 外幣捐款網站 https://www.ammado.com/ 並指定捐款 Teach For Taiwan。
+                p 請您連線至 #[a.link(href="https://www.ammado.com/", target="_blank", rel="noopener") Ammado 外幣捐款網站]並指定捐款 Teach For Taiwan。
+                p.list-title 如有在美國扣抵聯邦所得稅需求
+                p 請透過「世台聯合基金會（STUF United Fund Inc., 簡稱世台會或 STUF）」捐款。世台會為在美國登記成立之非營利慈善機構，為美國聯邦政府核可之 501(c)(3) 組織。由世台基金會開立的捐贈收據，在美國都可依法扣抵聯邦所得稅。
+                .btn.btn--oversea(@click="showModal('oversea-info')") 看捐款說明
+                modal(name="oversea-info", width="90%", height="auto", :scrollable="true", :pivotY="0.15")
+                  .modal-title 捐款說明
+                  .list-title 支票：
+                  p 請先填寫「#[a(href="https://drive.google.com/file/d/0B0CiDc-A6fLiVU9zWlVtSHdTTWc/view", target="_blank", rel="noopener") Pledge Form ]」，完成填寫此表後，連同支票寄到以下地址。（捐款時請於支票備註中，指名捐贈 Donor-designated fund - Teach For Taiwan）
+                  p
+                    | STUF United Fund <br>
+                    | P.O. Box 520511 <br>
+                    | Flushing, NY 11352 <br>
+                  .list-title 匯款：
+                  p 捐款者若以匯款的方式捐贈，請先行聯繫 世台基金會 黃怡妙 總幹事，世台基金會會提供詳細匯款資訊給您。捐款時請指名捐贈 Donor-designated fund - Teach For Taiwan
+                  p
+                    | 黃總幹事聯絡資訊： <br>
+                    | STUF United Fund <br>
+                    | Executive Director <br>
+                    | Yi-Miao Huang <br>
+                    | Tel : #[a(href="tel:9144330415") 914-433-0415] <br>
+                    | Email: #[a(href="mailto:yimiao@stufunited.org") yimiao@stufunited.org] <br>
+                  p 若有疑問請參考#[a(href="https://drive.google.com/file/d/0B0CiDc-A6fLic3hSV2w4aHZ6QTg/view", target="_blank", rel="noopener") 世台基金會指定捐款流程]，或來信詢問 #[a(href="mailto:ailing@teach4taiwan.org") ailing@teach4taiwan.org]，謝謝。
+
     router-link.link.btn-block.is-primary(to="credit-check")
       span 捐款徵信
     h3.title.title--sub 其他支持方式
@@ -88,6 +107,12 @@ export default {
     this.$store.commit('updateProgress', 'hide');
   },
   methods: {
+    showModal(modalName) {
+      this.$modal.show(modalName);
+    },
+    hideModal(modalName) {
+      this.$modal.hide(modalName);
+    },
   },
 };
 </script>
@@ -249,6 +274,30 @@ export default {
 .collapsible-sub {
   .collapsible-body {
     padding: 1em 2em;
+  }
+}
+
+.btn--oversea {
+  display: inline-block;
+  margin: 2em 0;
+  background: $c-grey-2;
+}
+
+.v--modal-overlay[data-modal="oversea-info"] {
+  .modal-title {
+    font-size: 1.8em;
+    margin: .5em auto;
+    text-align: center;
+    font-weight: bold;
+    color: $c-primary;
+  }
+  .list-title {
+    font-size: 1.2em;
+    padding: 0 16px;
+    margin: 1em auto 0;
+  }
+  p {
+    padding: 8px 16px 8px;
   }
 }
 </style>
