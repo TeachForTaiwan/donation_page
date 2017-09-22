@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Materials from 'vue-materials';
 // components
 import Support from '../components/Support.vue';
 import Single from '../components/Single.vue';
@@ -14,7 +13,6 @@ import RegularCheck from '../components/Regular-check.vue';
 import RegularPayment from '../components/Regular-payment.vue';
 
 Vue.use(Router);
-Vue.use(Materials);
 
 export default new Router({
   // mode: 'history',

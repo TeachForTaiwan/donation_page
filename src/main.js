@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VeeValidate, { Validator } from 'vee-validate';
+import Materials from 'vue-materials';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from './App.vue';
@@ -13,6 +14,7 @@ import './sass/main.scss';
 
 Vue.use(VeeValidate);
 Vue.use(VueAxios, axios);
+Vue.use(Materials);
 
 Validator.updateDictionary(validatorDict);
 Validator.setLocale('zh_TW');
