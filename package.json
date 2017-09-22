@@ -36,17 +36,20 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "dev": "webpack-dev-server --open",
-    "mock": "json-server --watch mock/db.json --m mock/post-to-get.js",
+    "mock": "json-server --watch mock/db.json",
+    "mock-get": "json-server --watch mock/db.json --m mock/post-to-get.js",
     "mock-faker": "json-server --watch mock/faker-data.js",
     "mock-dev": "yarn run mockfaker | yarn run dev"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "faker": "^4.1.0",
     "lodash": "^4.17.4",
     "sweetalert2": "^6.9.0",
     "tw-city-selector": "^1.0.9",
     "vee-validate": "^2.0.0-rc.14",
     "vue": "^2.4.2",
+    "vue-axios": "^2.0.2",
     "vue-materials": "^1.0.7-rc.7",
     "vue-router": "^2.7.0",
     "vuex": "^2.4.0"

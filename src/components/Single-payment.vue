@@ -52,7 +52,8 @@
           span.help.is-danger(v-show="errors.has('method')") {{ errors.first('method') }}
       .btn-container
         router-link.btn.btn--grey(to="single-check") 回上一步
-        router-link.btn(to="/") 確認付款
+        //- router-link.btn(to="/") 確認付款
+        .btn(@click="handleSubmit") 確認付款
 </template>
 <script>
 import swal from 'sweetalert2';
@@ -87,8 +88,8 @@ export default {
     if (to.path === '/') {
       this.validateForm()
         .then(() => {
-          this.$store.commit('updateFormData', this.formData);
-          sessionStorage.setItem('formData', JSON.stringify(this.formData));
+          // this.$store.commit('updateFormData', this.formData);
+          // sessionStorage.setItem('formData', JSON.stringify(this.formData));
           next();
         })
         .catch((errMsg) => {
@@ -117,9 +118,8 @@ export default {
       return new Promise((resolve, reject) => {
         this.$validator.validateAll().then((result) => {
           if (result) {
-            console.log(result);
             // eslint-disable-next-line
-            console.log('Form Submitted!');
+            console.log('validateForm success');
             resolve(result);
             return;
           }
@@ -132,7 +132,27 @@ export default {
       console.log('str');
       this.validateForm()
         .then(() => {
-          console.log('okokokok');
+          console.log('starting POST formData...');
+          // POST 送出表單
+          this.axios.post('http://localhost:3000/posts', this.formData)
+            .then((response) => {
+              console.log(response.data);
+              swal(
+                '成功送出',
+                '資料成功送出！',
+                'success',
+              );
+              sessionStorage.clear(); // 清空 session
+              this.$router.push('/'); // 回到首頁
+            })
+            .catch((err) => {
+              console.error(err);
+              swal(
+                '送出失敗',
+                '資料送出失敗，請稍後再試，或洽詢網站管理員',
+                'error',
+              );
+            });
         })
         .catch((errorMsg) => {
           console.error(errorMsg);

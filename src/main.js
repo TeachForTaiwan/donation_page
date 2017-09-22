@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VeeValidate, { Validator } from 'vee-validate';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -9,6 +11,7 @@ import './js/header';
 import './sass/main.scss';
 
 Vue.use(VeeValidate);
+Vue.use(VueAxios, axios);
 
 // http://vee-validate.logaretm.com/rules.html#custom-messages
 const dict = {
