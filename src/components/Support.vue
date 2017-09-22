@@ -48,7 +48,7 @@
                 modal(name="oversea-info", width="90%", height="auto", :scrollable="true", :pivotY="0.15")
                   .modal-title 捐款說明
                   .list-title 支票：
-                  p 請先填寫「#[a(href="https://drive.google.com/file/d/0B0CiDc-A6fLiVU9zWlVtSHdTTWc/view", target="_blank", rel="noopener") Pledge Form ]」，完成填寫此表後，連同支票寄到以下地址。（捐款時請於支票備註中，指名捐贈 Donor-designated fund - Teach For Taiwan）
+                  p 請先填寫「#[a.link(href="https://drive.google.com/file/d/0B0CiDc-A6fLiVU9zWlVtSHdTTWc/view", target="_blank", rel="noopener") Pledge Form ]」，完成填寫此表後，連同支票寄到以下地址。（捐款時請於支票備註中，指名捐贈 Donor-designated fund - Teach For Taiwan）
                   p
                     | STUF United Fund <br>
                     | P.O. Box 520511 <br>
@@ -60,9 +60,9 @@
                     | STUF United Fund <br>
                     | Executive Director <br>
                     | Yi-Miao Huang <br>
-                    | Tel : #[a(href="tel:9144330415") 914-433-0415] <br>
-                    | Email: #[a(href="mailto:yimiao@stufunited.org") yimiao@stufunited.org] <br>
-                  p 若有疑問請參考#[a(href="https://drive.google.com/file/d/0B0CiDc-A6fLic3hSV2w4aHZ6QTg/view", target="_blank", rel="noopener") 世台基金會指定捐款流程]，或來信詢問 #[a(href="mailto:ailing@teach4taiwan.org") ailing@teach4taiwan.org]，謝謝。
+                    | Tel : #[a.link(href="tel:9144330415") 914-433-0415] <br>
+                    | Email: #[a.link(href="mailto:yimiao@stufunited.org") yimiao@stufunited.org] <br>
+                  p 若有疑問請參考#[a.link(href="https://drive.google.com/file/d/0B0CiDc-A6fLic3hSV2w4aHZ6QTg/view", target="_blank", rel="noopener") 世台基金會指定捐款流程]，或來信詢問 #[a.link(href="mailto:ailing@teach4taiwan.org") ailing@teach4taiwan.org]，謝謝。
 
     router-link.link.btn-block.is-primary(to="credit-check")
       span 捐款徵信
@@ -78,7 +78,7 @@
       p.p 如您對支出的項目與用途有任何疑問，非常歡迎您隨時與我們聯繫，我們很樂意提供您更詳細的說明。詳細財報，歡迎參考 104 學年度支出收入報表。
       p.p 有您的投入，我們就能支持越多有熱情、有能力的老師進入更多有需要的地方！
       p.p 不論是捐款、師資培訓資源、相關硬體資源（如：汽機車、電腦、辦公會議空間等）、或是您的專業（如：紀錄片拍攝、平面設計、會計財務、行銷管理等），以及設備資源（如：單眼相機、數位相機、DV 攝影機、腳架等），都有可能成為幫助我們更好的關鍵。
-      p.p 若是您希望捐款，請直接透過本頁面捐贈。若有其它資源分享的意願，煩請您寄信至 tft@teach4taiwan.org，我們將儘快與您聯繫。
+      p.p 若是您希望捐款，請直接透過本頁面捐贈。若有其它資源分享的意願，煩請您寄信至 #[a.link(href="mailto:tft@teach4taiwan.org") tft@teach4taiwan.org]，我們將儘快與您聯繫。
 </template>
 
 <script>
@@ -298,6 +298,16 @@ export default {
   }
   p {
     padding: 8px 16px 8px;
+  }
+}
+
+p {
+  .link {
+    border-bottom: 1px dashed rgba($c-text, .5);
+    transition: .1s ease-in-out;
+    &:hover {
+      border-bottom: 1px dashed $c-text;
+    }
   }
 }
 </style>
