@@ -97,7 +97,7 @@
           name="address",
           type="text",
           :class="{ 'is-danger': errors.has('address') }",
-          @change="updateReceiptData",
+          @input="updateReceiptData",
           placeholder="請輸入地址",
           v-model="formData.address",
           v-validate="'required'"
@@ -217,7 +217,6 @@ import swal from 'sweetalert2';
 export default {
   data() {
     return {
-      receiptCheck: false,
     };
   },
   computed: {
@@ -236,10 +235,8 @@ export default {
       }
     },
     handleReceiptCheck() {
-      this.formData.receiptCounty = this.formData.county;
-      this.formData.receiptDistrict = this.formData.district;
-      this.formData.receiptAddress = this.formData.address;
       this.formData.receiptCheck = !this.formData.receiptCheck;
+      if (this.formData.receiptCheck) this.updateReceiptData();
     },
     validateForm() {
       return new Promise((resolve, reject) => {
