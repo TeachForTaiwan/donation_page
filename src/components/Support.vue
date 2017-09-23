@@ -4,11 +4,11 @@
     p.p TFT 與有師資需求的偏鄉小學合作，支持該班級優秀教師的培育。
     p.p 您的捐款不但是校園的及時雨，也投資了陪伴幾十位孩子兩年的守護者、啟發者、改變者。
     .icon-container
-      router-link.link(to="single")
+      a.link(href="app.html#/single")
         figure.figure
           img.icon(src="../assets/icon_single.png", alt="單次捐款")
           figcaption.text 單次捐款
-      router-link.link(to="regular")
+      a.link(href="app.html#/regular")
         figure.figure
           img.icon(src="../assets/icon_regular.png", alt="定期定額捐款")
           figcaption.text 定期定額捐款
@@ -64,13 +64,13 @@
                     | Email: #[a.link(href="mailto:yimiao@stufunited.org") yimiao@stufunited.org] <br>
                   p 若有疑問請參考#[a.link(href="https://drive.google.com/file/d/0B0CiDc-A6fLic3hSV2w4aHZ6QTg/view", target="_blank", rel="noopener") 世台基金會指定捐款流程]，或來信詢問 #[a.link(href="mailto:ailing@teach4taiwan.org") ailing@teach4taiwan.org]，謝謝。
 
-    router-link.link.btn-block.is-primary(to="credit-check")
+    a.link.btn-block.is-primary(href="app.html#/credit-check")
       span 捐款徵信
     h3.title.title--sub 其他支持方式
     .block-container
-      router-link.link.btn-block.btn-block--half.is-green(to="")
+      a.link.btn-block.btn-block--half.is-green(href="#")
         span 募款專案
-      router-link.link.btn-block.btn-block--half.is-green(to="")
+      a.link.btn-block.btn-block--half.is-green(href="#")
         span 資源分享
     article.article
       p.p TFT非常珍惜每一份得來不易的資源，務求透明、公開、有效地使用每一塊錢。 教師計畫是 TFT 的核心任務，為了讓孩子有好的教育品質，我們積極招募多元人才、以貼近現場需求的核心特質為篩選要件、以注重「教學力」與「領導力」的課程培養教師、以提供專業即時的支持系統維持老師之教學品質與熱情、並以嚴謹的方法評估計畫成效。
@@ -86,25 +86,11 @@
 export default {
   data() {
     return {
-      formData: {
-        dateS: '',
-        dateE: '',
-        name: '',
-      },
-      result: {
-        date: '', // 捐款日期
-        receiptNumber: '', // 收據編號
-        name: '', // 捐款人
-        amount: '', // 捐款金額
-        usage: '', // 捐款用途
-      },
     };
   },
   components: {
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '支持 TFT');
-    this.$store.commit('updateProgress', 'hide');
   },
   methods: {
     showModal(modalName) {

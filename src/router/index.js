@@ -1,16 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 // components
-import Support from '../components/Support.vue';
-import Single from '../components/Single.vue';
+import Single from '../components/Single.vue'; // 單次捐款
 import SingleForm from '../components/Single-form.vue';
 import SingleCheck from '../components/Single-check.vue';
 import SinglePayment from '../components/Single-payment.vue';
-import CreditCheck from '../components/Credit-check.vue';
-import Regular from '../components/Regular.vue';
+import Regular from '../components/Regular.vue'; // 定期定額
 import RegularForm from '../components/Regular-form.vue';
 import RegularCheck from '../components/Regular-check.vue';
 import RegularPayment from '../components/Regular-payment.vue';
+import CreditCheck from '../components/Credit-check.vue'; // 捐款徵信
 
 Vue.use(Router);
 
@@ -19,7 +18,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Support,
+      component: CreditCheck,
     },
     {
       path: '/single',

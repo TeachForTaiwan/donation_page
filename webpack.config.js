@@ -4,18 +4,21 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const BabiliPlugin = require("babili-webpack-plugin");
 const webpack = require('webpack');
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    'index': './src/index.js',
+    'app': './src/app.js'
+  },
   devServer: {
     contentBase: './dist',
     hot: true
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
@@ -77,8 +80,18 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      inject: false,
       hash: true,
-      template: './src/views/index.pug'
+      template: './src/views/index.pug',
+      chunks: 'index',
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      hash: true,
+      template: './src/views/app.pug',
+      chunks: 'app',
+      filename: 'app.html'
     }),
     new ExtractTextPlugin({
       filename: 'main.css',
