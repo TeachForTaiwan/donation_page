@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueHead from 'vue-head';
 import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -11,6 +12,7 @@ import './js/header';
 // custom style
 import './sass/main.scss';
 
+Vue.use(VueHead);
 Vue.use(VeeValidate);
 Vue.use(VueAxios, axios);
 

@@ -12,11 +12,21 @@
 <script>
 import Logo from './components/Logo.vue';
 import ProgressBar from './components/Progress-bar.vue';
+import { headMeta, headLink } from './head';
 
 export default {
   data() {
     return {
     };
+  },
+  head: {
+    title: {
+      inner: '支持我們',
+    },
+    meta() {
+      return headMeta;
+    },
+    link: headLink,
   },
   mounted() {
   },
