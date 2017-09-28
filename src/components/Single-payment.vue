@@ -81,7 +81,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '單次捐款');
+    this.$store.commit('updatePageTitle', '線上單次捐款');
     this.$store.commit('updateProgress', 3);
   },
   beforeRouteLeave(to, from, next) {

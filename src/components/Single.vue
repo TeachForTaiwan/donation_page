@@ -21,7 +21,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '單次捐款');
+    this.$store.commit('updatePageTitle', '線上單次捐款');
     this.$store.commit('updateProgress', 1);
     this.$store.commit('updateProgressText', {
       step1: '捐款說明',
@@ -47,7 +47,7 @@ export default {
   .item {
     line-height: 1.71;
     margin: .5em auto;
-    @include for-phone-only{
+    @include for-phone-only {
       margin-left: 2em;
       margin-right: .5em;
       padding: 0;

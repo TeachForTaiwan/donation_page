@@ -256,7 +256,7 @@ export default {
   },
   mounted() {
     /* eslint-disable no-new */
-    this.$store.commit('updatePageTitle', '單次捐款');
+    this.$store.commit('updatePageTitle', '線上單次捐款');
     this.$store.commit('updateProgress', 2);
     // address
     new TWCitySelector({

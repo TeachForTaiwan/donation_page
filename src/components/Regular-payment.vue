@@ -100,7 +100,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '定期定額捐款');
+    this.$store.commit('updatePageTitle', '線上定期定額捐款');
     this.$store.commit('updateProgress', 3);
   },
   beforeRouteLeave(to, from, next) {

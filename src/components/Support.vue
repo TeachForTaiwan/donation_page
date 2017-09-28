@@ -6,12 +6,12 @@
     .icon-container
       a.link(href="app.html#/single")
         figure.figure
-          img.icon(src="../assets/icon_single.png", alt="單次捐款")
-          figcaption.text 單次捐款
+          img.icon(src="../assets/icon_single.png", alt="線上單次捐款")
+          figcaption.text 線上單次捐款
       a.link(href="app.html#/regular")
         figure.figure
-          img.icon(src="../assets/icon_regular.png", alt="定期定額捐款")
-          figcaption.text 定期定額捐款
+          img.icon(src="../assets/icon_regular.png", alt="線上定期定額捐款")
+          figcaption.text 線上定期定額捐款
     v-collapsible(expandable)
       li
         v-collapsible-header
@@ -171,7 +171,7 @@ export default {
     }
     .text {
       padding: 20px 0 0;
-      font-size: 24px;
+      font-size: 22px;
       @include for-phone-only {
         font-size: calc(3vw + 6px);
       }
@@ -203,7 +203,7 @@ export default {
   text-align: center;
   padding: .5em 0;
   margin: 5px 0 20px;
-  font-size: 24px;
+  font-size: 22px;
   transition: .1s ease-in-out;
   &:hover {
     opacity: .7;

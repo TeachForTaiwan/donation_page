@@ -250,7 +250,7 @@ export default {
   },
   mounted() {
     /* eslint-disable no-new */
-    this.$store.commit('updatePageTitle', '定期定額捐款');
+    this.$store.commit('updatePageTitle', '線上定期定額捐款');
     this.$store.commit('updateProgress', 2);
     // address
     new TWCitySelector({

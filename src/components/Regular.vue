@@ -22,7 +22,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '定期定額捐款');
+    this.$store.commit('updatePageTitle', '線上定期定額捐款');
     this.$store.commit('updateProgress', 1);
     this.$store.commit('updateProgressText', {
       step1: '捐款說明',
