@@ -22,9 +22,9 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '線上定期定額捐款');
-    this.$store.commit('updateProgress', 1);
-    this.$store.commit('updateProgressText', {
+    this.$store.dispatch('updatePageTitle', '線上定期定額捐款');
+    this.$store.dispatch('updateProgress', 1);
+    this.$store.dispatch('updateProgressText', {
       step1: '捐款說明',
       step2: '填寫基本資料',
       step3: '信用卡授權',

@@ -1,5 +1,5 @@
 // import { app } from '../main';
-// import * as types from './mutation-types';
+import * as types from './mutation-types';
 
 export const state = {
   pageTitle: '', // 主標題
@@ -37,21 +37,33 @@ export const state = {
   },
 };
 
-export const mutations = {
-  updatePageTitle(state, text) {
-    state.pageTitle = text;
+export const actions = {
+  updatePageTitle({ commit }, text) {
+    commit(types.PAGETITLE, text);
   },
-  updateProgress(state, step) {
-    state.progress = step;
+  updateProgress({ commit }, step) {
+    commit(types.PROGRESS, step);
   },
-  updateProgressText(state, step) {
-    state.progressText = step;
+  updateProgressText({ commit }, steps) {
+    commit(types.PROGRESSTEXT, steps);
   },
-  updateFormData(state, data) {
-    state.formData = data;
+  updateFormData({ commit }, data) {
+    commit(types.FORMDATA, data);
   },
 };
 
-export const actions = {
-
+export const mutations = {
+  /* eslint-disable no-shadow, no-param-reassign */
+  [types.PAGETITLE](state, text) {
+    state.pageTitle = text;
+  },
+  [types.PROGRESS](state, step) {
+    state.progress = step;
+  },
+  [types.PROGRESSTEXT](state, steps) {
+    state.progressText = steps;
+  },
+  [types.FORMDATA](state, data) {
+    state.formData = data;
+  },
 };

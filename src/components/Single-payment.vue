@@ -81,14 +81,14 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '線上單次捐款');
-    this.$store.commit('updateProgress', 3);
+    this.$store.dispatch('updatePageTitle', '線上單次捐款');
+    this.$store.dispatch('updateProgress', 3);
   },
   beforeRouteLeave(to, from, next) {
     if (to.path === '/') {
       this.validateForm()
         .then(() => {
-          // this.$store.commit('updateFormData', this.formData);
+          // this.$store.dispatch('updateFormData', this.formData);
           // sessionStorage.setItem('formData', JSON.stringify(this.formData));
           next();
         })

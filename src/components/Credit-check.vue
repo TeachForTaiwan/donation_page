@@ -77,8 +77,8 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '捐款徵信');
-    this.$store.commit('updateProgress', 'hide');
+    this.$store.dispatch('updatePageTitle', '捐款徵信');
+    this.$store.dispatch('updateProgress', 'hide');
   },
   methods: {
     validateForm() {

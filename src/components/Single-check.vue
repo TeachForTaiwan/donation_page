@@ -54,8 +54,8 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('updatePageTitle', '線上單次捐款');
-    this.$store.commit('updateProgress', 2);
+    this.$store.dispatch('updatePageTitle', '線上單次捐款');
+    this.$store.dispatch('updateProgress', 2);
   },
 };
 </script>

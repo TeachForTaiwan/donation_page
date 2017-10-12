@@ -256,8 +256,8 @@ export default {
   },
   mounted() {
     /* eslint-disable no-new */
-    this.$store.commit('updatePageTitle', '線上單次捐款');
-    this.$store.commit('updateProgress', 2);
+    this.$store.dispatch('updatePageTitle', '線上單次捐款');
+    this.$store.dispatch('updateProgress', 2);
     // address
     new TWCitySelector({
       el: '[role="tw-city-selector"]',
@@ -275,7 +275,7 @@ export default {
     if (to.path === '/single-check') {
       this.validateForm()
         .then(() => {
-          this.$store.commit('updateFormData', this.formData);
+          this.$store.dispatch('updateFormData', this.formData);
           sessionStorage.setItem('formData', JSON.stringify(this.formData));
           next();
         })
