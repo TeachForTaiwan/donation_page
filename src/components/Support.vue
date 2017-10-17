@@ -70,8 +70,11 @@
     .block-container
       a.link.btn-block.btn-block--half.is-green(href="#")
         span 募款專案
-      a.link.btn-block.btn-block--half.is-green(href="#")
-        span 資源分享
+      template
+        router-link.link.btn-block.btn-block--half.is-green(to="resource-sharing")
+          span 資源分享
+      //- a.link.btn-block.btn-block--half.is-green(href="#")
+      //-   span 資源分享
     article.article
       p.p TFT非常珍惜每一份得來不易的資源，務求透明、公開、有效地使用每一塊錢。 教師計畫是 TFT 的核心任務，為了讓孩子有好的教育品質，我們積極招募多元人才、以貼近現場需求的核心特質為篩選要件、以注重「教學力」與「領導力」的課程培養教師、以提供專業即時的支持系統維持老師之教學品質與熱情、並以嚴謹的方法評估計畫成效。
       p.p 同時，我們也相當重視組織的永續性，並期望用專業支持使命，因此在行政、財務、資訊與內部人才選用育留等各面向上都竭力不斷提升，讓每一塊錢發揮最大的效益，是我們對自我的要求，也是對捐款人負責的態度。
@@ -91,6 +94,7 @@ export default {
   components: {
   },
   mounted() {
+    this.$store.dispatch('updatePageTitle', '支持 TFT');
   },
   methods: {
     showModal(modalName) {

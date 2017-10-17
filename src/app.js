@@ -4,7 +4,7 @@ import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from './App.vue';
-import router from './router';
+import router from './router/app';
 import store from './store';
 import validatorDict from './validate';
 // custom js

@@ -1,8 +1,9 @@
 <template lang="pug">
   div#app
     Logo
-    h1.title 支持 TFT
-    Support
+    h1.title {{ pageTitle }}
+    transition(name="fade", mode="out-in")
+      router-view
 </template>
 
 <script>
@@ -24,6 +25,13 @@ export default {
     },
     link: headLink,
   },
+  computed: {
+    pageTitle: {
+      get() {
+        return this.$store.state.pageTitle;
+      },
+    },
+  },
   mounted() {
   },
   components: {
@@ -38,5 +46,15 @@ export default {
 <style lang="scss" scoped>
 .title {
   margin: 1.5em auto;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
 }
 </style>

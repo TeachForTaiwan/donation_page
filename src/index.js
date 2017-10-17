@@ -3,6 +3,8 @@ import VueHead from 'vue-head';
 import Materials from 'vue-materials';
 import VModal from 'vue-js-modal';
 import App from './Index.vue';
+import router from './router/index';
+import store from './store';
 // custom js
 import './js/header';
 // custom style
@@ -14,6 +16,8 @@ Vue.use(VModal);
 
 const app = new Vue({
   el: 'app',
+  router,
+  store,
   render: h => h(App),
 });
 

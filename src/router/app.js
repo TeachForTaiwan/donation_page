@@ -10,8 +10,6 @@ import RegularForm from '../components/Regular-form.vue';
 import RegularCheck from '../components/Regular-check.vue';
 import RegularPayment from '../components/Regular-payment.vue';
 import CreditCheck from '../components/Credit-check.vue'; // 捐款徵信
-import Support from '../components/Support.vue'; // 資源分享
-import ResourceSharing from '../components/Resource-sharing.vue'; // 資源分享
 
 Vue.use(Router);
 
@@ -20,7 +18,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Support,
+      component: CreditCheck,
     },
     {
       path: '/single',
@@ -63,11 +61,6 @@ export default new Router({
       path: '/credit-check',
       name: 'CreditCheck',
       component: CreditCheck,
-    },
-    {
-      path: '/resource-sharing',
-      name: 'ResourceSharing',
-      component: ResourceSharing,
     },
     {
       path: '/*',
