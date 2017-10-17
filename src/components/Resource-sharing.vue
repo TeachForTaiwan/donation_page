@@ -56,9 +56,39 @@
     section
       .block
         .title.title--is-full TFT教師常見的資源需求
+        vue-tabs(active-tab-color="#FFF")
+          v-tab(title="物資")
+            .tab-resource
+              figure
+                figcaption
+                  img(src="https://dummyimage.com/190x180/000/fff", alt="")
+                  .title 教學物資
+                .content
+                  p 教師在教學與班級經營的過程中，若有教具或相關道具的輔助，定能讓教學更多采多姿、讓教室更顯溫暖。
+                  p 此類資源包括
+                    ul
+                      li - 教材或教具 ( 如各科教材教具、小白板、桌遊等)
+                      li - 教室用品 (如巧拼、矮書櫃、粉筆夾等)
+                      li - 電子用品 (如相機、錄音筆、簡報筆、平板電腦等)
+              figure
+                figcaption
+                  img(src="https://dummyimage.com/190x180/000/fff", alt="")
+                  .title 學習物資
+                .content
+              figure
+                figcaption
+                  img(src="https://dummyimage.com/190x180/000/fff", alt="")
+                  .title 生活物資
+                .content
+          v-tab(title="合作專案", icon="ti-user")
+            .tab-project
+
 </template>
 
 <script>
+// https://cristijora.github.io/vue-tabs/
+import { VueTabs, VTab } from 'vue-nav-tabs';
+
 export default {
   data() {
     return {
@@ -67,6 +97,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch('updatePageTitle', '資源分享');
+  },
+  components: {
+    VueTabs,
+    VTab,
   },
 };
 </script>
@@ -187,6 +221,11 @@ section {
   font-weight: bold;
 }
 
+.is-full {
+  display: block;
+  width: 100%;
+}
+
 figure {
   margin: 0;
   padding: 0;
@@ -199,5 +238,22 @@ figure {
     flex: $i;
   }
 }
-</style>
 
+
+
+.tab-resource {
+  display: flex;
+  figure {}
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    .title {
+      font-weight: bold;
+    }
+  }
+}
+
+.tab-project {}
+</style>
