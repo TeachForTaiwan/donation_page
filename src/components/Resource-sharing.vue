@@ -54,41 +54,37 @@
             img.icon(src="https://dummyimage.com/100x100/000/fff", alt="")
             .text 回應常見需求
     section
-      .block
+      .block.col-12
         .title.title--is-full TFT教師常見的資源需求
-        vue-tabs(active-tab-color="#FFF")
-          v-tab(title="物資")
-            .tab-resource
-              figure
-                figcaption
-                  img(src="https://dummyimage.com/190x180/000/fff", alt="")
-                  .title 教學物資
-                .content
-                  p 教師在教學與班級經營的過程中，若有教具或相關道具的輔助，定能讓教學更多采多姿、讓教室更顯溫暖。
-                  p 此類資源包括
-                    ul
-                      li - 教材或教具 ( 如各科教材教具、小白板、桌遊等)
-                      li - 教室用品 (如巧拼、矮書櫃、粉筆夾等)
-                      li - 電子用品 (如相機、錄音筆、簡報筆、平板電腦等)
-              figure
-                figcaption
-                  img(src="https://dummyimage.com/190x180/000/fff", alt="")
-                  .title 學習物資
-                .content
-              figure
-                figcaption
-                  img(src="https://dummyimage.com/190x180/000/fff", alt="")
-                  .title 生活物資
-                .content
-          v-tab(title="合作專案", icon="ti-user")
-            .tab-project
-
+        .tabs
+          .tab(@click="handleTab", data-target="#tab-resource") 物資
+          .tab(@click="handleTab", data-target="#tab-project") 合作專案
+        #tab-resource.tab-content.is-show
+          figure
+            figcaption
+              img(src="https://dummyimage.com/190x180/000/fff", alt="")
+              .title 教學物資
+            .content
+              p 教師在教學與班級經營的過程中，若有教具或相關道具的輔助，定能讓教學更多采多姿、讓教室更顯溫暖。
+              p 此類資源包括
+                ul
+                  li - 教材或教具 ( 如各科教材教具、小白板、桌遊等)
+                  li - 教室用品 (如巧拼、矮書櫃、粉筆夾等)
+                  li - 電子用品 (如相機、錄音筆、簡報筆、平板電腦等)
+          figure
+            figcaption
+              img(src="https://dummyimage.com/190x180/000/fff", alt="")
+              .title 學習物資
+            .content
+          figure
+            figcaption
+              img(src="https://dummyimage.com/190x180/000/fff", alt="")
+              .title 生活物資
+            .content
+        #tab-project.tab-content
 </template>
 
 <script>
-// https://cristijora.github.io/vue-tabs/
-import { VueTabs, VTab } from 'vue-nav-tabs';
-
 export default {
   data() {
     return {
@@ -98,9 +94,22 @@ export default {
   mounted() {
     this.$store.dispatch('updatePageTitle', '資源分享');
   },
-  components: {
-    VueTabs,
-    VTab,
+  methods: {
+    handleTab(e) {
+      const tabs = document.querySelectorAll('.tabs .tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const tab = e.target;
+      const tabContent = document.querySelector(tab.dataset.target);
+      console.log(tabContent);
+      tabs.forEach((el) => {
+        el.classList.remove('is-active');
+      });
+      tabContents.forEach((el) => {
+        el.classList.remove('is-show');
+      });
+      tab.classList.add('is-active');
+      tabContent.classList.add('is-show');
+    },
   },
 };
 </script>
@@ -239,9 +248,34 @@ figure {
   }
 }
 
+.tabs {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  .tab {
+    flex: 1;
+    transition: .3s ease-in-out;
+    padding: 15px 0;
+    cursor: pointer;
+    &.is-active {
+      background: #FFF;
+    }
+  }
+}
 
+.tab-content {
+  display: none;
+  background-color: #FFF;
+  padding: 10px 0;
+  @include for-tablet-landscape-up {
+    padding: 10px 15px;
+  }
+  &.is-show {
+    display: block;
+  }
+}
 
-.tab-resource {
+#tab-resource.is-show {
   display: flex;
   figure {}
   figcaption {
@@ -255,5 +289,5 @@ figure {
   }
 }
 
-.tab-project {}
+#tab-project.is-show {}
 </style>
